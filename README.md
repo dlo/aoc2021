@@ -14,4 +14,8 @@ Howto
 
 3. Start writing code in the `${DAY}` folder.
 
-4. When you're ready to test, add a test file in the `${DAY}` folder. Use `day1/part2_test.go` as a template.
+4. When you're ready to test, add a test file in the `${DAY}` folder. Use `day1/part2_test.go` as a template, and add the test to the `test` section in the `Makefile`. Run tests with:
+
+    ```shell
+   make test
+   ```
