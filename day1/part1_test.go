@@ -6,11 +6,18 @@ import (
 	"testing"
 )
 
-func TestPart1(t *testing.T) {
-	items := utils.LinesFromFile("day1_input.txt")
+func TestPart1CalculateNumberOfIncreases(t *testing.T) {
+	var tests = []struct {
+		filename string
+		want     int
+	}{
+		{"day1_input.txt", 1374},
+	}
 
-	want := 1374
-	if got := Part1CalculateNumberOfIncreases(items); got != want {
-		assert.Equal(t, want, got)
+	for _, tt := range tests {
+		items := utils.LinesFromFile(tt.filename)
+		if got := Part1CalculateNumberOfIncreases(items); got != tt.want {
+			assert.Equal(t, tt.want, got)
+		}
 	}
 }

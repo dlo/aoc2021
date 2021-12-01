@@ -1,6 +1,10 @@
 package day1
 
 func Part2GenerateThreeMeasurementSlidingWindows(items []int) []int {
+	if len(items) < 3 {
+		return []int{}
+	}
+
 	sum := items[0] + items[1] + items[2]
 	values := []int{sum}
 
