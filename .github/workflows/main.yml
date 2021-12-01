@@ -1,0 +1,19 @@
+name: go
+
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: initialize
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - name: build
+        run: make build
+
+      - name: test
+        run: make test
