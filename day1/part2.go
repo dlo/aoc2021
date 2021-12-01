@@ -1,19 +1,11 @@
 package day1
 
 func Part2GenerateThreeMeasurementSlidingWindows(items []int) []int {
-	sum := 0
-	var values []int
-	for i, value := range items {
-		sum += value
+	sum := items[0] + items[1] + items[2]
+	values := []int{sum}
 
-		if i < 2 {
-			continue
-		}
-
-		if i > 2 {
-			sum -= items[i-3]
-		}
-
+	for i, value := range items[3:] {
+		sum += value - items[i]
 		values = append(values, sum)
 	}
 
