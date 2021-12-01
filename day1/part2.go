@@ -1,21 +1,21 @@
 package day1
 
-func Part2GenerateThreeMeasurementSlidingWindows(items []int) []int {
-	if len(items) < 3 {
+import "github.com/dlo/aoc2021/utils"
+
+func Part2GenerateThreeMeasurementSlidingWindows(depths []int) []int {
+	if len(depths) < 3 {
 		return []int{}
 	}
 
-	sum := items[0] + items[1] + items[2]
-	values := []int{sum}
-
-	for i, value := range items[3:] {
-		sum += value - items[i]
-		values = append(values, sum)
+	sum := utils.SumSlice(depths[0:2])
+	measurements := []int{sum}
+	for i, depth := range depths[3:] {
+		sum += depth - depths[i]
+		measurements = append(measurements, sum)
 	}
-
-	return values
+	return measurements
 }
 
-func Part2CalculateNumberOfIncreasesInSlidingWindows(items []int) int {
-	return Part1CalculateNumberOfIncreases(Part2GenerateThreeMeasurementSlidingWindows(items))
+func Part2CountIncreasesInSlidingWindows(depths []int) int {
+	return Part1CountIncreases(Part2GenerateThreeMeasurementSlidingWindows(depths))
 }

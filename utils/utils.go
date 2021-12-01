@@ -8,6 +8,14 @@ import (
 	"strconv"
 )
 
+func SumSlice(values []int) int {
+	sum := 0
+	for value := range values {
+		sum += value
+	}
+	return sum
+}
+
 func LinesFromFile(filename string) []int {
 	var reader io.Reader
 	if filename == "stdin" {

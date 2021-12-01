@@ -8,16 +8,16 @@ import (
 
 func TestPart1CalculateNumberOfIncreases(t *testing.T) {
 	var tests = []struct {
-		filename string
-		want     int
+		measurements []int
+		want         int
 	}{
-		{"day1_example_input.txt", 7},
-		{"day1_input.txt", 1374},
+		{[]int{200}, 0},
+		{utils.LinesFromFile("day1_example_input.txt"), 7},
+		{utils.LinesFromFile("day1_input.txt"), 1374},
 	}
 
 	for _, tt := range tests {
-		items := utils.LinesFromFile(tt.filename)
-		if got := Part1CalculateNumberOfIncreases(items); got != tt.want {
+		if got := Part1CountIncreases(tt.measurements); got != tt.want {
 			assert.Equal(t, tt.want, got)
 		}
 	}

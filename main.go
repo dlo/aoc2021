@@ -25,12 +25,12 @@ func main() {
 		case 1:
 			fmt.Print("Part One: ")
 			items := utils.LinesFromFile("day1/day1_input.txt")
-			fmt.Println(day1.Part1CalculateNumberOfIncreases(items))
+			fmt.Println(day1.Part1CountIncreases(items))
 
 		case 2:
 			fmt.Print("Part Two: ")
 			items := utils.LinesFromFile("day1/day1_input.txt")
-			fmt.Println(day1.Part2CalculateNumberOfIncreasesInSlidingWindows(items))
+			fmt.Println(day1.Part2CountIncreasesInSlidingWindows(items))
 		}
 
 	case 2:

@@ -1,18 +1,18 @@
 package day1
 
-func Part1CalculateNumberOfIncreases(items []int) int {
-	if len(items) < 2 {
+func Part1CountIncreases(depths []int) int {
+	if len(depths) < 2 {
 		return 0
 	}
 
-	increments := 0
-	previous := items[0]
-	for _, value := range items[1:] {
-		if value > previous {
-			increments++
+	count := 0
+	previousDepth := depths[0]
+	for _, depth := range depths[1:] {
+		if depth > previousDepth {
+			count++
 		}
-		previous = value
+		previousDepth = depth
 	}
 
-	return increments
+	return count
 }

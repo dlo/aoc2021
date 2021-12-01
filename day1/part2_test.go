@@ -8,16 +8,16 @@ import (
 
 func TestPart2CalculateNumberOfIncreasesInSlidingWindows(t *testing.T) {
 	var tests = []struct {
-		filename string
-		want     int
+		measurements []int
+		want         int
 	}{
-		{"day1_example_input.txt", 5},
-		{"day1_input.txt", 1418},
+		{[]int{200, 210}, 0},
+		{utils.LinesFromFile("day1_example_input.txt"), 5},
+		{utils.LinesFromFile("day1_input.txt"), 1418},
 	}
 
 	for _, tt := range tests {
-		items := utils.LinesFromFile(tt.filename)
-		if got := Part2CalculateNumberOfIncreasesInSlidingWindows(items); got != tt.want {
+		if got := Part2CountIncreasesInSlidingWindows(tt.measurements); got != tt.want {
 			assert.Equal(t, tt.want, got)
 		}
 	}
