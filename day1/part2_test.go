@@ -11,7 +11,7 @@ func TestPart2CalculateNumberOfIncreasesInSlidingWindows(t *testing.T) {
 		filename string
 		want     int
 	}{
-		{"day1_part2_example_input.txt", 5},
+		{"day1_example_input.txt", 5},
 		{"day1_input.txt", 1418},
 	}
 

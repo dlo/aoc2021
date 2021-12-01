@@ -11,6 +11,7 @@ func TestPart1CalculateNumberOfIncreases(t *testing.T) {
 		filename string
 		want     int
 	}{
+		{"day1_example_input.txt", 7},
 		{"day1_input.txt", 1374},
 	}
 
