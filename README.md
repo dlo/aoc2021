@@ -1,4 +1,4 @@
-Advent of Code 2021
+[Advent of Code 2021](https://adventofcode.com/)
 =
 
 ![go test](https://github.com/dlo/aoc2021/actions/workflows/main.yml/badge.svg)
