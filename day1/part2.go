@@ -2,7 +2,6 @@ package day1
 
 import (
 	"github.com/psampaz/slice"
-	"log"
 )
 
 func Part2GenerateSlidingWindows(depths []int) []int {
@@ -10,10 +9,7 @@ func Part2GenerateSlidingWindows(depths []int) []int {
 		return []int{}
 	}
 
-	sum, err := slice.SumInt(depths[0:3])
-	if err != nil {
-		log.Fatal(err)
-	}
+	sum, _ := slice.SumInt(depths[0:3])
 	measurements := []int{sum}
 	for i, depth := range depths[3:] {
 		sum += depth - depths[i]
