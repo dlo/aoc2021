@@ -35,7 +35,40 @@ func WriteLinesToFile(values []int, filename string) {
 	_ = csvWriter.WriteAll(stringValues)
 }
 
-func LinesFromFile(filename string) []int {
+func LinesFromFile(filename string) []string {
+	var reader io.Reader
+	if filename == "stdin" {
+		reader = os.Stdin
+	} else {
+		file, _ := os.Open(filename)
+		defer func(file *os.File) {
+			_ = file.Close()
+		}(file)
+		reader = file
+	}
+
+	csvReader := csv.NewReader(reader)
+	var items []string
+	for {
+		record, err := csvReader.Read()
+
+		if err == io.EOF {
+			break
+		}
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		for _, value := range record {
+			items = append(items, value)
+		}
+	}
+
+	return items
+}
+
+func IntegerLinesFromFile(filename string) []int {
 	var reader io.Reader
 	if filename == "stdin" {
 		reader = os.Stdin

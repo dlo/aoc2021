@@ -8,7 +8,7 @@ require (
 )
 
 require (
-	github.com/dlo/aoc2021/day2 v0.0.0
+	github.com/dlo/aoc2021/day2 v0.0.0-00010101000000-000000000000 // indirect
 	github.com/psampaz/slice v0.2.0 // indirect
 )
 

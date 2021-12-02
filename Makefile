@@ -4,6 +4,7 @@ PACKAGE := github.com/dlo/aoc2021/"$(FOLDER)"
 init:
 	mkdir "$(FOLDER)"
 	cd "$(FOLDER)" && go mod init "$(PACKAGE)"
+	go get "$(PACKAGE)"
 	go mod edit -require="$(PACKAGE)"@v0.0.0
 	go mod edit -replace="$(PACKAGE)"=./"$(FOLDER)"
 

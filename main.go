@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/dlo/aoc2021/day1"
+	"github.com/dlo/aoc2021/day2"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -20,7 +21,7 @@ func main() {
 
 	switch day {
 	case 1:
-		items := utils.LinesFromFile("day1/day1_input.txt")
+		items := utils.IntegerLinesFromFile("day1/day1_input.txt")
 
 		fmt.Print("Day One, ")
 		switch part {
@@ -34,8 +35,14 @@ func main() {
 		}
 
 	case 2:
+		fmt.Print("Day One, ")
 		switch part {
 		case 1:
+			fmt.Print("Part One: ")
+			instructions := day2.Part1ParseInstructions("day2/part1_input.txt")
+			position := day2.Part1CalculatePosition(instructions)
+			fmt.Println(position.X() * position.Y())
+
 		case 2:
 			break
 		}
