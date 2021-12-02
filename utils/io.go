@@ -8,14 +8,6 @@ import (
 	"strconv"
 )
 
-func SumSlice(values []int) int {
-	sum := 0
-	for _, value := range values {
-		sum += value
-	}
-	return sum
-}
-
 func WriteLinesToFile(values []int, filename string) {
 	writer, err := os.Create(filename)
 	if err != nil {

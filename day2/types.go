@@ -18,11 +18,16 @@ type Coordinate struct {
 	y int
 }
 
-func (c *Coordinate) ProductOfCoordinates() int {
-	return c.x * c.y
+type Status struct {
+	coordinate Coordinate
+	aim        int
 }
 
 type TestCase struct {
 	filename string
 	want     int
+}
+
+func (c *Coordinate) ProductOfCoordinates() int {
+	return c.x * c.y
 }

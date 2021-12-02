@@ -7,8 +7,8 @@ import (
 
 func TestPart1CalculatePosition(t *testing.T) {
 	var tests = []TestCase{
-		{"example_input.txt", -150},
-		{"input.txt", -2147104},
+		{"testdata/example_input.txt", -150},
+		{"testdata/input.txt", -2147104},
 	}
 
 	for _, tt := range tests {

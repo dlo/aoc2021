@@ -30,19 +30,23 @@ func Part1ParseInstructions(filename string) []Instruction {
 	return instructions
 }
 
+func (c *Coordinate) Part1ProcessInstruction(instruction Instruction) {
+	switch instruction.direction {
+	case Up:
+		c.y += instruction.distance
+
+	case Down:
+		c.y -= instruction.distance
+
+	case Forward:
+		c.x += instruction.distance
+	}
+}
+
 func Part1CalculatePosition(instructions []Instruction) Coordinate {
 	position := Coordinate{0, 0}
 	for _, instruction := range instructions {
-		switch instruction.direction {
-		case Up:
-			position.y += instruction.distance
-
-		case Down:
-			position.y -= instruction.distance
-
-		case Forward:
-			position.x += instruction.distance
-		}
+		position.Part1ProcessInstruction(instruction)
 	}
 
 	return position
