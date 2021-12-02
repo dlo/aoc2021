@@ -20,17 +20,17 @@ func main() {
 
 	switch day {
 	case 1:
+		items := utils.LinesFromFile("day1/day1_input.txt")
+
 		fmt.Print("Day One, ")
 		switch part {
 		case 1:
 			fmt.Print("Part One: ")
-			items := utils.LinesFromFile("day1/day1_input.txt")
 			fmt.Println(day1.Part1CountIncreases(items))
 
 		case 2:
 			fmt.Print("Part Two: ")
-			items := utils.LinesFromFile("day1/day1_input.txt")
-			fmt.Println(day1.Part2CountIncreasesInSlidingWindows(items))
+			fmt.Println(day1.Part1CountIncreases(day1.Part2GenerateSlidingWindows(items)))
 		}
 
 	case 2:

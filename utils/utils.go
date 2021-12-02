@@ -10,10 +10,29 @@ import (
 
 func SumSlice(values []int) int {
 	sum := 0
-	for value := range values {
+	for _, value := range values {
 		sum += value
 	}
 	return sum
+}
+
+func WriteLinesToFile(values []int, filename string) {
+	writer, err := os.Create(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer func(writer *os.File) {
+		_ = writer.Close()
+	}(writer)
+
+	csvWriter := csv.NewWriter(writer)
+	var stringValues [][]string
+	for _, value := range values {
+		stringValues = append(stringValues, []string{strconv.Itoa(value)})
+	}
+
+	_ = csvWriter.WriteAll(stringValues)
 }
 
 func LinesFromFile(filename string) []int {

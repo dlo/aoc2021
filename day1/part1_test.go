@@ -6,19 +6,21 @@ import (
 	"testing"
 )
 
-func TestPart1CalculateNumberOfIncreases(t *testing.T) {
-	var tests = []struct {
-		measurements []int
-		want         int
-	}{
+type Part1TestCase struct {
+	measurements []int
+	want int
+}
+
+func TestPart1CountIncreases(t *testing.T) {
+	var tests = []Part1TestCase{
 		{[]int{200}, 0},
 		{utils.LinesFromFile("day1_example_input.txt"), 7},
 		{utils.LinesFromFile("day1_input.txt"), 1374},
+		{utils.LinesFromFile("day1_part2_example_output.txt"), 5},
+		{utils.LinesFromFile("day1_part2_output.txt"), 1418},
 	}
 
 	for _, tt := range tests {
-		if got := Part1CountIncreases(tt.measurements); got != tt.want {
-			assert.Equal(t, tt.want, got)
-		}
+		assert.Equal(t, tt.want, Part1CountIncreases(tt.measurements))
 	}
 }

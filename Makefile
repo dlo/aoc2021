@@ -17,4 +17,5 @@ build:
 #go test -v ./...
 .PHONY: test
 test:
-	go test github.com/dlo/aoc2021/day1 -v -cover
+	go test github.com/dlo/aoc2021/day1 -cover
+	go test github.com/dlo/aoc2021/utils -cover

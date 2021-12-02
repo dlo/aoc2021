@@ -6,19 +6,19 @@ import (
 	"testing"
 )
 
-func TestPart2CalculateNumberOfIncreasesInSlidingWindows(t *testing.T) {
-	var tests = []struct {
-		measurements []int
-		want         int
-	}{
-		{[]int{200, 210}, 0},
-		{utils.LinesFromFile("day1_example_input.txt"), 5},
-		{utils.LinesFromFile("day1_input.txt"), 1418},
+type Part2TestCase struct {
+	measurements []int
+	want []int
+}
+
+func TestPart2GenerateSlidingWindows(t *testing.T) {
+	var tests = []Part2TestCase{
+		{[]int{200, 210}, []int{}},
+		{utils.LinesFromFile("day1_example_input.txt"), utils.LinesFromFile("day1_part2_example_output.txt")},
+		{utils.LinesFromFile("day1_input.txt"), utils.LinesFromFile("day1_part2_output.txt")},
 	}
 
 	for _, tt := range tests {
-		if got := Part2CountIncreasesInSlidingWindows(tt.measurements); got != tt.want {
-			assert.Equal(t, tt.want, got)
-		}
+		assert.ObjectsAreEqualValues(tt.want, Part2GenerateSlidingWindows(tt.measurements))
 	}
 }
