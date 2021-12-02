@@ -1,23 +1,9 @@
 package day2
 
-func (s *Status) Part2ProcessInstruction(instruction Instruction) {
-	switch instruction.direction {
-	case Down:
-		s.aim += instruction.distance
-
-	case Up:
-		s.aim -= instruction.distance
-
-	case Forward:
-		s.coordinate.x += instruction.distance
-		s.coordinate.y += s.aim * instruction.distance
-	}
-}
-
-func Part2CalculatePosition(instructions []Instruction) Coordinate {
+func Part2CalculateCoordinateFromCommands(commands []Command) Coordinate {
 	status := Status{Coordinate{0, 0}, 0}
-	for _, instruction := range instructions {
-		status.Part2ProcessInstruction(instruction)
+	for _, command := range commands {
+		status.ProcessCommand(command)
 	}
 
 	return status.coordinate
