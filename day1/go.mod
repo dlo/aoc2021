@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/dlo/aoc2021/utils v0.0.0
+	github.com/psampaz/slice v0.2.0
 	github.com/stretchr/testify v1.7.0
 )
 

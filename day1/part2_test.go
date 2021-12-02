@@ -14,8 +14,8 @@ type Part2TestCase struct {
 func TestPart2GenerateSlidingWindows(t *testing.T) {
 	var tests = []Part2TestCase{
 		{[]int{200, 210}, []int{}},
-		{utils.LinesFromFile("day1_example_input.txt"), utils.LinesFromFile("day1_part2_example_output.txt")},
-		{utils.LinesFromFile("day1_input.txt"), utils.LinesFromFile("day1_part2_output.txt")},
+		{utils.LinesFromFile("part1_example_input.txt"), utils.LinesFromFile("part2_example_output.txt")},
+		{utils.LinesFromFile("part1_input.txt"), utils.LinesFromFile("part2_output.txt")},
 	}
 
 	for _, tt := range tests {

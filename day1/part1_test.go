@@ -14,10 +14,10 @@ type Part1TestCase struct {
 func TestPart1CountIncreases(t *testing.T) {
 	var tests = []Part1TestCase{
 		{[]int{200}, 0},
-		{utils.LinesFromFile("day1_example_input.txt"), 7},
-		{utils.LinesFromFile("day1_input.txt"), 1374},
-		{utils.LinesFromFile("day1_part2_example_output.txt"), 5},
-		{utils.LinesFromFile("day1_part2_output.txt"), 1418},
+		{utils.LinesFromFile("part1_example_input.txt"), 7},
+		{utils.LinesFromFile("part1_input.txt"), 1374},
+		{utils.LinesFromFile("part2_example_output.txt"), 5},
+		{utils.LinesFromFile("part2_output.txt"), 1418},
 	}
 
 	for _, tt := range tests {

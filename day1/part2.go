@@ -1,7 +1,8 @@
 package day1
 
 import (
-	"github.com/dlo/aoc2021/utils"
+	"github.com/psampaz/slice"
+	"log"
 )
 
 func Part2GenerateSlidingWindows(depths []int) []int {
@@ -9,7 +10,10 @@ func Part2GenerateSlidingWindows(depths []int) []int {
 		return []int{}
 	}
 
-	sum := utils.SumSlice(depths[0:3])
+	sum, err := slice.SumInt(depths[0:3])
+	if err != nil {
+		log.Fatal(err)
+	}
 	measurements := []int{sum}
 	for i, depth := range depths[3:] {
 		sum += depth - depths[i]
@@ -19,6 +23,6 @@ func Part2GenerateSlidingWindows(depths []int) []int {
 	return measurements
 }
 
-func Part2CountIncreasesInSlidingWindows(depths []int) int {
-	return Part1CountIncreases(Part2GenerateSlidingWindows(depths))
-}
+//func Part2CountIncreasesInSlidingWindows(depths []int) int {
+//	return Part1CountIncreases(Part2GenerateSlidingWindows(depths))
+//}
