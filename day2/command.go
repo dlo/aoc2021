@@ -13,13 +13,13 @@ type Command struct {
 
 func Part1ParseCommands(filename string) []Command {
 	lines := utils.LinesFromFile(filename)
-	var instructions []Command
+	var commands []Command
 	for _, line := range lines {
 		idx := strings.IndexRune(line, ' ')
 		direction := DirectionFromRawDirection(line[:idx])
 		distance, _ := strconv.Atoi(line[idx+1:])
-		instructions = append(instructions, Command{direction, distance})
+		commands = append(commands, Command{direction, distance})
 	}
 
-	return instructions
+	return commands
 }
