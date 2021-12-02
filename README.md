@@ -15,11 +15,11 @@ Howto
 -
 
 1. Each day has an associated problem set. Use `make init` to generate all the required files for each day. For example:
-   
+
     ```sh
     make init FOLDER=day3
     ```
-   
+
 2. Add new case statements in `main.go`.
 
 3. Start writing code in the `${DAY}` folder.
@@ -28,12 +28,8 @@ Howto
 
     ```shell
    $ make test
-   go test github.com/dlo/aoc2021/day1 -v -cover
-   === RUN   TestPart1CalculateNumberOfIncreases
-   --- PASS: TestPart1CalculateNumberOfIncreases (0.00s)
-   === RUN   TestPart2CalculateNumberOfIncreasesInSlidingWindows
-   --- PASS: TestPart2CalculateNumberOfIncreasesInSlidingWindows (0.00s)
-   PASS
-   coverage: 100.0% of statements
-   ok      github.com/dlo/aoc2021/day1     (cached)        coverage: 100.0% of statements
+   go test github.com/dlo/aoc2021/day1 -cover
+   ok      github.com/dlo/aoc2021/day1     0.234s  coverage: 100.0% of statements
+   go test github.com/dlo/aoc2021/utils -cover
+   ok      github.com/dlo/aoc2021/utils    (cached)        coverage: 12.1% of statements
    ```
