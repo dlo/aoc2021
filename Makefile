@@ -19,4 +19,5 @@ build:
 .PHONY: test
 test:
 	go test github.com/dlo/aoc2021/day1 -cover
+	go test github.com/dlo/aoc2021/day2 -cover
 	go test github.com/dlo/aoc2021/utils -cover

@@ -5,15 +5,15 @@ import (
 	"testing"
 )
 
-func TestPart1CalculatePosition(t *testing.T) {
+func TestPart2CalculatePosition(t *testing.T) {
 	var tests = []TestCase{
-		{"example_input.txt", -150},
-		{"input.txt", -2147104},
+		{"example_input.txt", 900},
+		{"input.txt", 2044620088},
 	}
 
 	for _, tt := range tests {
 		instructions := Part1ParseInstructions(tt.filename)
-		position := Part1CalculatePosition(instructions)
+		position := Part2CalculatePosition(instructions)
 		assert.Equal(t, tt.want, position.ProductOfCoordinates())
 	}
 }

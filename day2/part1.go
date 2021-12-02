@@ -6,32 +6,6 @@ import (
 	"strings"
 )
 
-type Direction int
-
-const (
-	Up Direction = iota
-	Down
-	Forward
-)
-
-type Instruction struct {
-	direction Direction
-	distance  int
-}
-
-type Coordinate struct {
-	x int
-	y int
-}
-
-func (c *Coordinate) X() int {
-	return c.x
-}
-
-func (c *Coordinate) Y() int {
-	return c.y
-}
-
 func Part1DirectionFromRawDirection(raw string) Direction {
 	switch raw {
 	case "up":

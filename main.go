@@ -35,15 +35,19 @@ func main() {
 		}
 
 	case 2:
+		instructions := day2.Part1ParseInstructions("day2/part1_input.txt")
+
 		fmt.Print("Day One, ")
 		switch part {
 		case 1:
 			fmt.Print("Part One: ")
-			instructions := day2.Part1ParseInstructions("day2/part1_input.txt")
 			position := day2.Part1CalculatePosition(instructions)
-			fmt.Println(position.X() * position.Y())
+			fmt.Println(position.ProductOfCoordinates())
 
 		case 2:
+			fmt.Print("Part Two: ")
+			position := day2.Part2CalculatePosition(instructions)
+			fmt.Println(position.ProductOfCoordinates())
 			break
 		}
 	}
