@@ -6,6 +6,7 @@ const (
 	Up Direction = iota
 	Down
 	Forward
+	Invalid
 )
 
 func DirectionFromRawDirection(raw string) Direction {
@@ -14,7 +15,9 @@ func DirectionFromRawDirection(raw string) Direction {
 		return Up
 	case "down":
 		return Down
-	default:
+	case "forward":
 		return Forward
+	default:
+		return Invalid
 	}
 }
