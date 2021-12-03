@@ -4,11 +4,6 @@ import (
 	"math/bits"
 )
 
-type DiagnosticReport struct {
-	numbers []uint64
-	length  int
-}
-
 func (r *DiagnosticReport) CalculatePowerConsumption() uint64 {
 	// `sums` stores the most common bits in reverse order
 	sums := make([]float64, r.length)

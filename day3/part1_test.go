@@ -12,7 +12,6 @@ type CalculateGammaRateTestCase struct {
 }
 
 func TestCalculateGammaRate(t *testing.T) {
-
 	var tests = []CalculateGammaRateTestCase{
 		{"testdata/example_input.txt", 198},
 		{"testdata/input.txt", 3912944},
