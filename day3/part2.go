@@ -50,28 +50,17 @@ func (r *DiagnosticReport) CalculateRating(mask uint64, criteria RatingCriteria)
 	}
 
 	zeros, ones := r.GroupNumbersBasedOnMask(mask)
-	var candidates DiagnosticReport
 
 	if len(ones.numbers) == 0 || len(zeros.numbers) == 0 {
-		candidates = *r
+		return r.CalculateRating(mask>>1, criteria)
 	} else {
-		switch criteria {
-		case OxygenGeneratorRatingCriteria:
-			if len(ones.numbers) >= len(zeros.numbers) {
-				candidates = *ones
-			} else {
-				candidates = *zeros
-			}
-		case CO2RatingCriteria:
-			if len(zeros.numbers) <= len(ones.numbers) {
-				candidates = *zeros
-			} else {
-				candidates = *ones
-			}
+		if criteria == OxygenGeneratorRatingCriteria && len(zeros.numbers) > len(ones.numbers) ||
+			criteria == CO2RatingCriteria && len(zeros.numbers) <= len(ones.numbers) {
+			return zeros.CalculateRating(mask>>1, criteria)
+		} else {
+			return ones.CalculateRating(mask>>1, criteria)
 		}
 	}
-
-	return candidates.CalculateRating(mask>>1, criteria)
 }
 
 func (r *DiagnosticReport) CalculateOxygenGeneratorRating(mask uint64) uint64 {
