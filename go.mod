@@ -3,18 +3,12 @@ module github.com/dlo/aoc2021
 go 1.17
 
 require (
-	github.com/dlo/aoc2021/day1 v0.0.0
-	github.com/dlo/aoc2021/utils v0.0.0
+	github.com/psampaz/slice v0.2.0
+	github.com/stretchr/testify v1.7.0
 )
 
 require (
-	github.com/dlo/aoc2021/day2 v0.0.0-00010101000000-000000000000 // indirect
-	github.com/dlo/aoc2021/day3 v0.0.0-20211203194531-4658bf56ab80 // indirect
-	github.com/psampaz/slice v0.2.0 // indirect
+	github.com/davecgh/go-spew v1.1.0 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c // indirect
 )
-
-replace github.com/dlo/aoc2021/day1 => ./day1
-
-replace github.com/dlo/aoc2021/utils => ./utils
-
-replace github.com/dlo/aoc2021/day2 => ./day2

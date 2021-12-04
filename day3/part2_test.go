@@ -8,7 +8,7 @@ import (
 
 type TestCase struct {
 	filename string
-	want int
+	want     int
 }
 
 func TestCalculateOxygenGeneratorRating(t *testing.T) {
@@ -20,7 +20,7 @@ func TestCalculateOxygenGeneratorRating(t *testing.T) {
 	for _, tt := range tests {
 		reportValues, length := utils.BinaryLinesFromFile(tt.filename)
 		report := DiagnosticReport{reportValues, length}
-		assert.EqualValues(t, tt.want, int(report.CalculateOxygenGeneratorRating(1 << report.length)))
+		assert.EqualValues(t, tt.want, int(report.CalculateOxygenGeneratorRating(1<<report.length)))
 	}
 }
 
@@ -33,7 +33,7 @@ func TestCalculateCO2ScrubberRating(t *testing.T) {
 	for _, tt := range tests {
 		reportValues, length := utils.BinaryLinesFromFile(tt.filename)
 		report := DiagnosticReport{reportValues, length}
-		assert.EqualValues(t, tt.want, int(report.CalculateCO2ScrubberRating(1 << report.length)))
+		assert.EqualValues(t, tt.want, int(report.CalculateCO2ScrubberRating(1<<report.length)))
 	}
 }
 

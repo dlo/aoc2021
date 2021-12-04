@@ -8,7 +8,7 @@ import (
 
 type Part2TestCase struct {
 	measurements []int
-	want []int
+	want         []int
 }
 
 func TestPart2GenerateSlidingWindows(t *testing.T) {
