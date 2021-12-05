@@ -14,7 +14,7 @@ func (s *Status) ProcessCommand(instruction Command) {
 		s.aim -= instruction.distance
 
 	case Forward:
-		s.coordinate.x += instruction.distance
-		s.coordinate.y += s.aim * instruction.distance
+		s.coordinate.X += instruction.distance
+		s.coordinate.Y += s.aim * instruction.distance
 	}
 }

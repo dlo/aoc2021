@@ -1,23 +1,23 @@
 package day2
 
 type Coordinate struct {
-	x int
-	y int
+	X int
+	Y int
 }
 
 func (c *Coordinate) ProductOfCoordinates() int {
-	return c.x * c.y
+	return c.X * c.Y
 }
 
 func (c *Coordinate) ProcessCommand(command Command) {
 	switch command.direction {
 	case Up:
-		c.y += command.distance
+		c.Y += command.distance
 
 	case Down:
-		c.y -= command.distance
+		c.Y -= command.distance
 
 	case Forward:
-		c.x += command.distance
+		c.X += command.distance
 	}
 }

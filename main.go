@@ -7,6 +7,7 @@ import (
 	"github.com/dlo/aoc2021/day2"
 	"github.com/dlo/aoc2021/day3"
 	"github.com/dlo/aoc2021/day4"
+	"github.com/dlo/aoc2021/day5"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -65,6 +66,14 @@ func main() {
 
 		case 2:
 			fmt.Println(result.ScoreOfLastWinningBoard())
+		}
+
+	case 5:
+		measurements := day5.ParseHydrothermalVentMeasurements("day5/testdata/example_input.txt")
+		measurements.Process()
+		switch part {
+		case 1:
+			fmt.Println("Part One ", measurements.CountIntersections())
 		}
 	}
 }
