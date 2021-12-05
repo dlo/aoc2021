@@ -60,6 +60,7 @@ func main() {
 		}
 	case 4:
 		result := day4.ParseBingoCardDataFromFile("day4/testdata/input.txt")
+		fmt.Print("Day Four, ")
 		switch part {
 		case 1:
 			fmt.Println(result.FindWinningScore())
@@ -70,9 +71,15 @@ func main() {
 
 	case 5:
 		measurements := day5.ParseHydrothermalVentMeasurements("day5/testdata/example_input.txt")
-		measurements.Process()
+
+		fmt.Print("Day Five, ")
 		switch part {
 		case 1:
+			measurements.Process(false)
+			fmt.Println("Part One ", measurements.CountIntersections())
+
+		case 2:
+			measurements.Process(true)
 			fmt.Println("Part One ", measurements.CountIntersections())
 		}
 	}
