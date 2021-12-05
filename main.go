@@ -59,6 +59,12 @@ func main() {
 		}
 	case 4:
 		result := day4.ParseBingoCardDataFromFile("day4/testdata/input.txt")
-		fmt.Println(*result.FindWinningScore())
+		switch part {
+		case 1:
+			fmt.Println(result.FindWinningScore())
+
+		case 2:
+			fmt.Println(result.ScoreOfLastWinningBoard())
+		}
 	}
 }

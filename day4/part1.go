@@ -50,16 +50,16 @@ func (b *BingoBoard) IsWinning(numbers []int) (bool, int) {
 	return false, 0
 }
 
-func (b *Bingo) FindWinningScore() *int {
+func (b *Bingo) FindWinningScore() int {
 	for i := range b.Numbers {
 		for _, board := range b.Boards {
 			if isWinning, score := board.IsWinning(b.Numbers[:i]); isWinning {
-				return &score
+				return score
 			}
 		}
 	}
 
-	return nil
+	return -1
 }
 
 func ParseNumbersFromString(input string) []int {
