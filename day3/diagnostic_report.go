@@ -1,6 +1,6 @@
 package day3
 
 type DiagnosticReport struct {
-	numbers []uint64
-	length  int
+	Numbers []uint64
+	Length  int
 }

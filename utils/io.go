@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bufio"
 	"encoding/csv"
 	"io"
 	"log"
@@ -27,7 +28,27 @@ func WriteLinesToFile(values []int, filename string) {
 	_ = csvWriter.WriteAll(stringValues)
 }
 
-func LinesFromFile(filename string) []string {
+func ReadLinesFromFile(filename string) []string {
+	var reader io.Reader
+	if filename == "stdin" {
+		reader = os.Stdin
+	} else {
+		file, _ := os.Open(filename)
+		defer func(file *os.File) {
+			_ = file.Close()
+		}(file)
+		reader = file
+	}
+
+	var lines []string
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	return lines
+}
+
+func LinesFromCSV(filename string) []string {
 	var reader io.Reader
 	if filename == "stdin" {
 		reader = os.Stdin
@@ -61,7 +82,7 @@ func LinesFromFile(filename string) []string {
 }
 
 func IntegerLinesFromFile(filename string) []int {
-	lines := LinesFromFile(filename)
+	lines := LinesFromCSV(filename)
 	var items []int
 	for _, value := range lines {
 		result, _ := strconv.Atoi(value)
@@ -71,7 +92,7 @@ func IntegerLinesFromFile(filename string) []int {
 }
 
 func BinaryLinesFromFile(filename string) ([]uint64, int) {
-	lines := LinesFromFile(filename)
+	lines := LinesFromCSV(filename)
 	var items []uint64
 	maxLength := 0
 	for _, value := range lines {

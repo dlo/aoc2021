@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/dlo/aoc2021/day1"
 	"github.com/dlo/aoc2021/day2"
+	"github.com/dlo/aoc2021/day3"
+	"github.com/dlo/aoc2021/day4"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -26,26 +28,37 @@ func main() {
 		fmt.Print("Day One, ")
 		switch part {
 		case 1:
-			fmt.Print("Part One: ")
-			fmt.Println(day1.Part1CountIncreases(items))
+			fmt.Println("Part One: ", day1.Part1CountIncreases(items))
 
 		case 2:
-			fmt.Print("Part Two: ")
-			fmt.Println(day1.Part1CountIncreases(day1.Part2GenerateSlidingWindows(items)))
+			fmt.Println("Part Two: ", day1.Part1CountIncreases(day1.Part2GenerateSlidingWindows(items)))
 		}
-
 	case 2:
-		commands := day2.Part1ParseCommands("day2/part1_input.txt")
+		commands := day2.Part1ParseCommands("day2/testdata/input.txt")
 
-		fmt.Print("Day One, ")
+		fmt.Print("Day Two, ")
 		switch part {
 		case 1:
 			position := day2.Part1CalculateCoordinateFromCommands(commands)
-			fmt.Print("Part One: ", position.ProductOfCoordinates())
+			fmt.Println("Part One: ", position.ProductOfCoordinates())
 
 		case 2:
 			position := day2.Part2CalculateCoordinateFromCommands(commands)
-			fmt.Print("Part Two: ", position.ProductOfCoordinates())
+			fmt.Println("Part Two: ", position.ProductOfCoordinates())
 		}
+	case 3:
+		reportValues, length := utils.BinaryLinesFromFile("day3/testdata/input.txt")
+		report := day3.DiagnosticReport{Numbers: reportValues, Length: length}
+
+		fmt.Print("Day Three, ")
+		switch part {
+		case 1:
+			fmt.Println("Part One: ", int(report.CalculatePowerConsumption()))
+		case 2:
+			fmt.Println("Part Two: ", int(report.CalculateLifeSupportRating()))
+		}
+	case 4:
+		result := day4.ParseBingoCardDataFromFile("day4/testdata/input.txt")
+		fmt.Println(*result.FindWinningScore())
 	}
 }

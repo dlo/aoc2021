@@ -12,7 +12,7 @@ type Command struct {
 }
 
 func Part1ParseCommands(filename string) []Command {
-	lines := utils.LinesFromFile(filename)
+	lines := utils.LinesFromCSV(filename)
 	var commands []Command
 	for _, line := range lines {
 		idx := strings.IndexRune(line, ' ')

@@ -6,8 +6,8 @@ import (
 
 func (r *DiagnosticReport) CalculatePowerConsumption() uint64 {
 	// `sums` stores the most common bits in reverse order
-	sums := make([]float64, r.length)
-	for _, number := range r.numbers {
+	sums := make([]float64, r.Length)
+	for _, number := range r.Numbers {
 		var mask uint64 = 1
 		for i := 0; i < len(sums); i++ {
 			value := float64(bits.OnesCount64(mask&number)) - 0.5
