@@ -1,10 +1,11 @@
 package day5
 
 import (
-	"github.com/dlo/aoc2021/day2"
-	"github.com/dlo/aoc2021/utils"
 	"strconv"
 	"strings"
+
+	"github.com/dlo/aoc2021/day2"
+	"github.com/dlo/aoc2021/utils"
 )
 
 func CoordinateFromString(input string) day2.Coordinate {
