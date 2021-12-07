@@ -4,10 +4,10 @@ import (
 	"github.com/dlo/aoc2021/utils"
 )
 
-func CalculateSchoolSizeAfterNDays(school []int, days int) int {
+func CalculateSchoolSizeAfterNDays(timers []int, days int) int {
 	counts := make([]int, 9)
-	for _, age := range school {
-		counts[age]++
+	for _, timer := range timers {
+		counts[timer]++
 	}
 
 	for i := 0; i < days; i++ {
