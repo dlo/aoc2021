@@ -90,9 +90,12 @@ func main() {
 		fmt.Print("Day Six, ")
 		switch part {
 		case 1:
-			agesAfterEightyDays := day6.CalculateSchoolSizeAfterNDays(ages, 80)
-			fmt.Println("Part One:", len(agesAfterEightyDays))
+			size := day6.CalculateSchoolSizeAfterNDays(ages, 80)
+			fmt.Println("Part One:", size)
 
+		case 2:
+			size := day6.CalculateSchoolSizeAfterNDays(ages, 256)
+			fmt.Println("Part Two:", size)
 		}
 	}
 }
