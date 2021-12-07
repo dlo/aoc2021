@@ -6,19 +6,19 @@ import (
 )
 
 func CalculateSchoolSizeAfterNDays(school []int, days int) int {
-	fishCounts := make([]int, 9)
+	counts := make([]int, 9)
 	for _, age := range school {
-		fishCounts[age]++
+		counts[age]++
 	}
 
 	for i := 0; i < days; i++ {
-		parentCount := fishCounts[0]
-		fishCounts = fishCounts[1:]
-		fishCounts[6] += parentCount
-		fishCounts = append(fishCounts, parentCount)
+		parentCount := counts[0]
+		counts = counts[1:]
+		counts[6] += parentCount
+		counts = append(counts, parentCount)
 	}
 
-	return utils.SumSlice(fishCounts)
+	return utils.SumSlice(counts)
 }
 
 func ParseFishFile(filename string) []int {
