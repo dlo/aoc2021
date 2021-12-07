@@ -3,8 +3,13 @@ PACKAGE := github.com/dlo/aoc2021/"$(FOLDER)"
 .PHONY: init
 init:
 	mkdir -p "$(FOLDER)/testdata"
+	touch "$(FOLDER)/testdata/example_input.txt"
+	touch "$(FOLDER)/testdata/input.txt"
 	touch "$(FOLDER)"/part1.go
 	touch "$(FOLDER)"/part1_test.go
+	git add .
+	git add -f "$(FOLDER)"/testdata/*txt
+	git commit -m "start $(FOLDER) solution"
 
 .PHONY: sweep
 sweep:
