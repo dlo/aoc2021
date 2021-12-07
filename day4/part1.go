@@ -2,9 +2,6 @@ package day4
 
 import (
 	"github.com/dlo/aoc2021/utils"
-	"regexp"
-	"strconv"
-	"strings"
 )
 
 type BingoBoard struct {
@@ -62,30 +59,14 @@ func (b *Bingo) FindWinningScore() int {
 	return -1
 }
 
-func ParseNumbersFromString(input string) []int {
-	regex := regexp.MustCompile(`[^0-9]+`)
-	var numbers []int
-	if len(input) == 0 {
-		return numbers
-	}
-
-	input = strings.Trim(input, " ")
-
-	for _, value := range regex.Split(input, -1) {
-		number, _ := strconv.Atoi(value)
-		numbers = append(numbers, number)
-	}
-	return numbers
-}
-
 func ParseBingoCardDataFromFile(filename string) Bingo {
 	lines := utils.ReadLinesFromFile(filename)
-	numbers := ParseNumbersFromString(lines[0])
+	numbers := utils.ParseNumbersFromString(lines[0])
 
 	var boards []BingoBoard
 	var grid [][]int
 	for _, line := range lines[1:] {
-		row := ParseNumbersFromString(line)
+		row := utils.ParseNumbersFromString(line)
 		if len(row) > 0 {
 			grid = append(grid, row)
 		}

@@ -6,7 +6,9 @@ import (
 	"io"
 	"log"
 	"os"
+	"regexp"
 	"strconv"
+	"strings"
 )
 
 func WriteLinesToFile(values []int, filename string) {
@@ -103,4 +105,20 @@ func BinaryLinesFromFile(filename string) ([]uint64, int) {
 		items = append(items, uint64(result))
 	}
 	return items, maxLength
+}
+
+func ParseNumbersFromString(input string) []int {
+	regex := regexp.MustCompile(`[^0-9]+`)
+	var numbers []int
+	if len(input) == 0 {
+		return numbers
+	}
+
+	input = strings.Trim(input, " ")
+
+	for _, value := range regex.Split(input, -1) {
+		number, _ := strconv.Atoi(value)
+		numbers = append(numbers, number)
+	}
+	return numbers
 }
