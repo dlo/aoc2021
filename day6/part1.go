@@ -13,9 +13,9 @@ func CalculateSchoolSizeAfterNDays(school []int, days int) int {
 
 	for i := 0; i < days; i++ {
 		parentCount := fishCounts[0]
-		fishCounts = append(fishCounts, parentCount)
 		fishCounts = fishCounts[1:]
 		fishCounts[6] += parentCount
+		fishCounts = append(fishCounts, parentCount)
 	}
 
 	return utils.SumSlice(fishCounts)
