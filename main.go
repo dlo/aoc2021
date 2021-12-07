@@ -8,6 +8,7 @@ import (
 	"github.com/dlo/aoc2021/day3"
 	"github.com/dlo/aoc2021/day4"
 	"github.com/dlo/aoc2021/day5"
+	"github.com/dlo/aoc2021/day6"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -76,11 +77,22 @@ func main() {
 		switch part {
 		case 1:
 			measurements.Process(false)
-			fmt.Println("Part One ", measurements.CountIntersections())
+			fmt.Println("Part One:", measurements.CountIntersections())
 
 		case 2:
 			measurements.Process(true)
-			fmt.Println("Part One ", measurements.CountIntersections())
+			fmt.Println("Part One:", measurements.CountIntersections())
+		}
+
+	case 6:
+		ages := day6.ParseFishFile("day6/testdata/input.txt")
+
+		fmt.Print("Day Six, ")
+		switch part {
+		case 1:
+			agesAfterEightyDays := day6.CalculateSchoolSizeAfterNDays(ages, 80)
+			fmt.Println("Part One:", len(agesAfterEightyDays))
+
 		}
 	}
 }
