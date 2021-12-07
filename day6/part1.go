@@ -17,7 +17,7 @@ func CalculateSchoolSizeAfterNDays(timers []int, days int) int {
 		counts = append(counts, parentCount)
 	}
 
-	return utils.SumSlice(counts)
+	return utils.SliceSum(counts)
 }
 
 func ParseFishFile(filename string) []int {

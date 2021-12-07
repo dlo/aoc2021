@@ -9,6 +9,7 @@ import (
 	"github.com/dlo/aoc2021/day4"
 	"github.com/dlo/aoc2021/day5"
 	"github.com/dlo/aoc2021/day6"
+	"github.com/dlo/aoc2021/day7"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -96,6 +97,20 @@ func main() {
 		case 2:
 			size := day6.CalculateSchoolSizeAfterNDays(ages, 256)
 			fmt.Println("Part Two:", size)
+		}
+
+	case 7:
+		positions := day7.ParseHorizontalPositions("day7/testdata/input.txt")
+
+		fmt.Print("Day Seven, ")
+		switch part {
+		case 1:
+			position := day7.CalculateCheapestPosition(positions, day7.Part1CalculateFuelUsageForDelta)
+			fmt.Println("Part One:", position)
+
+		case 2:
+			position := day7.CalculateCheapestPosition(positions, day7.Part2CalculateFuelUsageForDelta)
+			fmt.Println("Part Two:", position)
 		}
 	}
 }

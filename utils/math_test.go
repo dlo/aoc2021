@@ -7,7 +7,7 @@ import (
 
 type TestCase struct {
 	values []int
-	want int
+	want   int
 }
 
 func TestSumSlice(t *testing.T) {
@@ -19,7 +19,7 @@ func TestSumSlice(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := SumSlice(tt.values)
+		got := SliceSum(tt.values)
 		assert.Equal(t, got, tt.want)
 	}
 }
