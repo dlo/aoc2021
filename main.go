@@ -10,6 +10,7 @@ import (
 	"github.com/dlo/aoc2021/day5"
 	"github.com/dlo/aoc2021/day6"
 	"github.com/dlo/aoc2021/day7"
+	"github.com/dlo/aoc2021/day8"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -111,6 +112,18 @@ func main() {
 		case 2:
 			position := day7.CalculateCheapestPosition(positions, day7.Part2CalculateFuelUsageForDelta)
 			fmt.Println("Part Two:", position)
+		}
+
+	case 8:
+		values := day8.ParseDigitsAndOutputValues("day8/testdata/input.txt")
+
+		fmt.Print("Day Eight, ", values)
+		switch part {
+		case 1:
+			fmt.Println("Part One:")
+
+		case 2:
+			fmt.Println("Part Two:")
 		}
 	}
 }
