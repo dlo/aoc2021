@@ -30,10 +30,10 @@ func (pv *PatternAndValue) UniqueDigitCount() int {
 	return count
 }
 
-func CountUniqueDigitsInValues(patternsAndValues []PatternAndValue) int {
+func (pvs PatternsAndValues) CountOneFourSevenEights() int {
 	count := 0
-	for _, patternAndValue := range patternsAndValues {
-		count += patternAndValue.UniqueDigitCount()
+	for _, pv := range pvs {
+		count += pv.UniqueDigitCount()
 	}
 	return count
 }

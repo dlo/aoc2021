@@ -5,12 +5,7 @@ import (
 	"testing"
 )
 
-type TestCase struct {
-	filename string
-	want     int
-}
-
-func TestCalculateCheapestPositionPart2(t *testing.T) {
+func TestSumDecodedInputs(t *testing.T) {
 	var tests = []TestCase{
 		{"testdata/example_input.txt", 61229},
 		{"testdata/input.txt", 915941},
