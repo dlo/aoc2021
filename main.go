@@ -115,15 +115,21 @@ func main() {
 		}
 
 	case 8:
-		values := day8.ParseDigitsAndOutputValues("day8/testdata/input.txt")
+		values := day8.ParseDigitsAndOutputValues("day8/testdata/example_input.txt")
 
-		fmt.Print("Day Eight, ", values)
+		fmt.Print("Day Eight, ")
 		switch part {
 		case 1:
-			fmt.Println("Part One:")
+			break
+			//fmt.Println("Part One:", day8.GenerateSevenSegmentConfiguration(values[0].Patterns))
 
 		case 2:
 			fmt.Println("Part Two:")
+			for _, pattern := range values[:1] {
+				mapping := day8.ImportPatterns(pattern.Patterns)
+				//fmt.Println(color.New(color.Bold, color.Red).Render("hahah"))
+				mapping.DecodeNumber(pattern.Value)
+			}
 		}
 	}
 }
