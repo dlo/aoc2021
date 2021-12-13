@@ -8,8 +8,7 @@ import (
 type Number int
 type Letters string
 type Segment int
-type SegmentMapping [7][7]int
-type SegmentMappingNew struct {
+type SegmentMapping struct {
 	mapping    [7][7]int
 	potentials map[int][]Number
 }
@@ -39,25 +38,16 @@ func InitialPotentialNumbers() map[int][]Number {
 		3: {7},
 		4: {4},
 		5: {2, 3, 5},
-		6: {6, 9},
+		6: {0, 6, 9},
 		7: {8},
 	}
 }
 
 func (s Letters) PotentialNumbers() []Number {
-	potentials := map[int][]Number{
-		2: {1},
-		3: {7},
-		4: {4},
-		5: {2, 3, 5},
-		6: {6, 9},
-		7: {8},
-	}
-
-	return potentials[len(s)]
+	return InitialPotentialNumbers()[len(s)]
 }
 
-func (n Number) SegmentsForNumber() []Segment {
+func (n Number) Segments() []Segment {
 	segments := map[int][]Segment{
 		1: {B, C},
 		2: {A, B, G, E, D},
@@ -87,33 +77,31 @@ func RuneToSegment(r rune) Segment {
 }
 
 func (sm *SegmentMapping) ImportPattern(pattern string) {
-	letters := Letters(pattern)
-	for _, number := range letters.PotentialNumbers() {
-		for _, segment := range number.SegmentsForNumber() {
+	for _, number := range sm.potentials[len(pattern)] {
+		for _, segment := range number.Segments() {
 			for _, r := range []rune(pattern) {
-				value := RuneToSegment(r)
-				sm[value][segment]++
+				sm.mapping[RuneToSegment(r)][segment]++
 			}
 		}
 	}
 }
 
-func (sm SegmentMapping) GenerateNumber(pattern string) [7]int {
-	var output [7]int
-	letters := Letters(pattern)
-	for _, number := range letters.PotentialNumbers() {
-		for _, segment := range number.SegmentsForNumber() {
-			output[A] += sm[segment][A]
-			output[B] += sm[segment][B]
-			output[C] += sm[segment][C]
-			output[D] += sm[segment][D]
-			output[E] += sm[segment][E]
-			output[F] += sm[segment][F]
-			output[G] += sm[segment][G]
-		}
-	}
-	return output
-}
+//func (sm SegmentMapping) GenerateNumber(pattern string) [7]int {
+//	var output [7]int
+//	letters := Letters(pattern)
+//	for _, number := range letters.PotentialNumbers() {
+//		for _, segment := range number.SegmentsSegments() {
+//			output[A] += sm.mapping[segment][A]
+//			output[B] += sm.mapping[segment][B]
+//			output[C] += sm.mapping[segment][C]
+//			output[D] += sm.mapping[segment][D]
+//			output[E] += sm.mapping[segment][E]
+//			output[F] += sm.mapping[segment][F]
+//			output[G] += sm.mapping[segment][G]
+//		}
+//	}
+//	return output
+//}
 
 func (sm SegmentMapping) MostLikelyNumberForValue(value string) Number {
 	letters := Letters(value)
@@ -122,9 +110,9 @@ func (sm SegmentMapping) MostLikelyNumberForValue(value string) Number {
 	var result Number
 	for _, potentialNumber := range letters.PotentialNumbers() {
 		total := 0
-		for i := range sm {
-			for _, segment := range potentialNumber.SegmentsForNumber() {
-				total += sm[i][segment]
+		for i := range sm.mapping {
+			for _, segment := range potentialNumber.Segments() {
+				total += sm.mapping[i][segment]
 			}
 		}
 
@@ -155,11 +143,9 @@ func (sm SegmentMapping) DecodeNumber(values []string) string {
 
 func ImportPatterns(patterns []string) SegmentMapping {
 	var runes [7][7]int
-	var sm SegmentMapping = runes
-
+	sm := SegmentMapping{runes, InitialPotentialNumbers()}
 	for _, pattern := range patterns {
 		sm.ImportPattern(pattern)
 	}
-
 	return sm
 }
