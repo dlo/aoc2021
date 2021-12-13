@@ -11,6 +11,7 @@ import (
 	"github.com/dlo/aoc2021/day6"
 	"github.com/dlo/aoc2021/day7"
 	"github.com/dlo/aoc2021/day8"
+	day9 "github.com/dlo/aoc2021/day9"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -125,6 +126,19 @@ func main() {
 
 		case 2:
 			fmt.Println("Part Two:", values.SumDecodedInputs())
+		}
+
+	case 9:
+		values := day9.GenerateHeightMap("day9/testdata/input.txt")
+
+		fmt.Print("Day Nine, ")
+		switch part {
+		case 1:
+			points := values.LowPoints()
+			fmt.Println("Part One:", points.Risk)
+
+		case 2:
+			//fmt.Println("Part Two:", values.SumDecodedInputs())
 		}
 	}
 }
