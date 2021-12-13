@@ -10,6 +10,8 @@ type PatternAndValue struct {
 	Value    []string
 }
 
+type PatternsAndValues []PatternAndValue
+
 func SplitBySpaces(s string) []string {
 	return strings.Split(s, " ")
 }
@@ -36,7 +38,7 @@ func CountUniqueDigitsInValues(patternsAndValues []PatternAndValue) int {
 	return count
 }
 
-func ParseDigitsAndOutputValues(filename string) []PatternAndValue {
+func ParseDigitsAndOutputValues(filename string) PatternsAndValues {
 	lines := utils.ReadLinesFromFile(filename)
 	var patternsAndValues []PatternAndValue
 

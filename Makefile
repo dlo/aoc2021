@@ -29,3 +29,4 @@ test:
 	go test github.com/dlo/aoc2021/day5 -cover
 	go test github.com/dlo/aoc2021/day6 -cover
 	go test github.com/dlo/aoc2021/day7 -cover
+	go test github.com/dlo/aoc2021/day8 -cover

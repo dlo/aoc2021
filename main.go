@@ -115,7 +115,7 @@ func main() {
 		}
 
 	case 8:
-		values := day8.ParseDigitsAndOutputValues("day8/testdata/example_input.txt")
+		values := day8.ParseDigitsAndOutputValues("day8/testdata/input.txt")
 
 		fmt.Print("Day Eight, ")
 		switch part {
@@ -124,12 +124,7 @@ func main() {
 			//fmt.Println("Part One:", day8.GenerateSevenSegmentConfiguration(values[0].Patterns))
 
 		case 2:
-			fmt.Println("Part Two:")
-			for _, pattern := range values[:1] {
-				mapping := day8.ImportPatterns(pattern.Patterns)
-				//fmt.Println(color.New(color.Bold, color.Red).Render("hahah"))
-				mapping.DecodeNumber(pattern.Value)
-			}
+			fmt.Println("Part Two:", values.SumDecodedInputs())
 		}
 	}
 }

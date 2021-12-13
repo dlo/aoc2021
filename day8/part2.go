@@ -1,39 +1,78 @@
 package day8
 
 import (
-	"fmt"
-	"strconv"
+	"sort"
+	"strings"
 )
 
 type Number int
 type Letters string
+type Pattern string
 type Segment int
-type SegmentMapping struct {
-	mapping    [7][7]int
-	potentials map[int][]Number
+type SegmentMapping map[Pattern][]Number
+
+type SortableRunes []rune
+
+func (r SortableRunes) Less(i, j int) bool {
+	return r[i] < r[j]
 }
 
-/*
-1. Take values.
-2. Each value corresponds to a number or numbers. E.g., ab corresponds to 1.
-3. For each letter in the value, find the _actual_ segment it could correspond to. For 1, that would be BC.
-We would then increment a[B_segment] and a[C_segment] by 1, and b[B_segment] and b[C_segment] by 1.
-4. When we display a pattern, e.g., cbdaf, go through each letter, and increment all of the segments, and display
-the total count.
-*/
+func (r SortableRunes) Swap(i, j int) {
+	r[i], r[j] = r[j], r[i]
+}
 
-const (
-	F = iota
-	A
-	B
-	G
-	E
-	C
-	D
-)
+func (r SortableRunes) Len() int {
+	return len(r)
+}
 
-func InitialPotentialNumbers() map[int][]Number {
-	return map[int][]Number{
+func (p Pattern) Contains(other Pattern) bool {
+	for _, r := range []rune(other) {
+		if !strings.ContainsRune(string(p), r) {
+			return false
+		}
+	}
+	return true
+}
+
+func (p *Pattern) Sort() {
+	var ints []int
+	for _, b := range []byte(*p) {
+		ints = append(ints, int(b))
+	}
+	sort.Ints(ints)
+
+	var sb strings.Builder
+	for _, i := range ints {
+		sb.WriteByte(byte(i))
+	}
+
+	*p = Pattern(sb.String())
+}
+
+func (sm SegmentMapping) DecodeInput(values []string) int {
+	result := 0
+	for _, value := range values {
+		pattern := Pattern(value)
+		pattern.Sort()
+
+		result *= 10
+		result += int(sm[pattern][0])
+	}
+
+	return result
+}
+
+func (pvs PatternsAndValues) SumDecodedInputs() int {
+	sum := 0
+	for _, pv := range pvs {
+		mapping := GenerateSegmentMapping(pv.Patterns)
+		sum += mapping.DecodeInput(pv.Value)
+	}
+	return sum
+}
+
+func GenerateSegmentMapping(rawPatterns []string) SegmentMapping {
+	potentials := map[int][]Number{
 		2: {1},
 		3: {7},
 		4: {4},
@@ -41,111 +80,44 @@ func InitialPotentialNumbers() map[int][]Number {
 		6: {0, 6, 9},
 		7: {8},
 	}
-}
 
-func (s Letters) PotentialNumbers() []Number {
-	return InitialPotentialNumbers()[len(s)]
-}
+	patternsToNumbers := map[Pattern][]Number{}
+	lengthsToPatterns := map[int][]Pattern{}
+	for _, rawPattern := range rawPatterns {
+		pattern := Pattern(rawPattern)
+		pattern.Sort()
+		patternsToNumbers[pattern] = potentials[len(pattern)]
 
-func (n Number) Segments() []Segment {
-	segments := map[int][]Segment{
-		1: {B, C},
-		2: {A, B, G, E, D},
-		3: {A, B, G, C, D},
-		4: {F, G, C, D},
-		5: {A, F, G, C, D},
-		6: {A, F, G, E, C, D},
-		7: {A, B, C},
-		8: {A, B, C, D, E, F},
+		lengths := lengthsToPatterns[len(pattern)]
+		lengthsToPatterns[len(pattern)] = append(lengths, pattern)
 	}
 
-	return segments[int(n)]
-}
+	one := lengthsToPatterns[2][0]
+	four := lengthsToPatterns[4][0]
+	var six Pattern
 
-func RuneToSegment(r rune) Segment {
-	runes := map[rune]Segment{
-		'a': A,
-		'b': B,
-		'c': C,
-		'd': D,
-		'e': E,
-		'f': F,
-		'g': G,
-	}
-
-	return runes[r]
-}
-
-func (sm *SegmentMapping) ImportPattern(pattern string) {
-	for _, number := range sm.potentials[len(pattern)] {
-		for _, segment := range number.Segments() {
-			for _, r := range []rune(pattern) {
-				sm.mapping[RuneToSegment(r)][segment]++
+	for _, pattern := range lengthsToPatterns[6] {
+		if pattern.Contains(one) {
+			if pattern.Contains(four) {
+				patternsToNumbers[pattern] = []Number{9}
+			} else {
+				patternsToNumbers[pattern] = []Number{0}
 			}
-		}
-	}
-}
-
-//func (sm SegmentMapping) GenerateNumber(pattern string) [7]int {
-//	var output [7]int
-//	letters := Letters(pattern)
-//	for _, number := range letters.PotentialNumbers() {
-//		for _, segment := range number.SegmentsSegments() {
-//			output[A] += sm.mapping[segment][A]
-//			output[B] += sm.mapping[segment][B]
-//			output[C] += sm.mapping[segment][C]
-//			output[D] += sm.mapping[segment][D]
-//			output[E] += sm.mapping[segment][E]
-//			output[F] += sm.mapping[segment][F]
-//			output[G] += sm.mapping[segment][G]
-//		}
-//	}
-//	return output
-//}
-
-func (sm SegmentMapping) MostLikelyNumberForValue(value string) Number {
-	letters := Letters(value)
-	biggest := 0
-	var totals [10]int
-	var result Number
-	for _, potentialNumber := range letters.PotentialNumbers() {
-		total := 0
-		for i := range sm.mapping {
-			for _, segment := range potentialNumber.Segments() {
-				total += sm.mapping[i][segment]
-			}
-		}
-
-		totals[potentialNumber] += total
-
-		if total > biggest {
-			result = potentialNumber
+		} else {
+			six = pattern
+			patternsToNumbers[pattern] = []Number{6}
 		}
 	}
 
-	fmt.Println(value)
-	for i := range totals {
-		fmt.Print(totals[i], " ")
+	for _, pattern := range lengthsToPatterns[5] {
+		if pattern.Contains(one) {
+			patternsToNumbers[pattern] = []Number{3}
+		} else if six.Contains(pattern) {
+			patternsToNumbers[pattern] = []Number{5}
+		} else {
+			patternsToNumbers[pattern] = []Number{2}
+		}
 	}
-	fmt.Println()
-	fmt.Println()
-	return result
-}
 
-func (sm SegmentMapping) DecodeNumber(values []string) string {
-	var runes string
-	for _, value := range values {
-		runes = runes + strconv.FormatUint(uint64(sm.MostLikelyNumberForValue(value)), 10)
-	}
-	fmt.Println(runes)
-	return runes
-}
-
-func ImportPatterns(patterns []string) SegmentMapping {
-	var runes [7][7]int
-	sm := SegmentMapping{runes, InitialPotentialNumbers()}
-	for _, pattern := range patterns {
-		sm.ImportPattern(pattern)
-	}
-	return sm
+	return patternsToNumbers
 }
