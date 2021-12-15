@@ -135,7 +135,7 @@ func main() {
 		switch part {
 		case 1:
 			points := values.LowPoints()
-			fmt.Println("Part One:", points.Risk)
+			fmt.Println("Part One:", points.R)
 
 		case 2:
 			values.GenerateBasins()

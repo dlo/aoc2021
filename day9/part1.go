@@ -5,15 +5,20 @@ import (
 	"github.com/dlo/aoc2021/utils"
 )
 
-type HeightMap [][]int
+type Risk int
+type HeightMap [][]Risk
 type Point [2]int
 type PointWithRisk struct {
 	point Point
-	risk  int
+	r     Risk
 }
 type PointsWithRisk struct {
 	Points []PointWithRisk
-	Risk   int
+	R      Risk
+}
+
+func (p Point) Coordinates() (int, int) {
+	return p[0], p[1]
 }
 
 func (hm HeightMap) IsValidPoint(point Point) bool {
@@ -50,7 +55,7 @@ func (hm HeightMap) LowPoints() PointsWithRisk {
 			point := [2]int{x, y}
 			if hm.IsLowPoint(point) {
 				risk := hm[y][x] + 1
-				result.Risk += risk
+				result.R += risk
 				result.Points = append(result.Points, PointWithRisk{[2]int{x, y}, risk})
 			}
 		}
@@ -60,11 +65,11 @@ func (hm HeightMap) LowPoints() PointsWithRisk {
 
 func GenerateHeightMap(filename string) HeightMap {
 	lines := utils.ReadLinesFromFile(filename)
-	var heightmap [][]int
+	var heightmap HeightMap
 	for y, line := range lines {
-		heightmap = append(heightmap, []int{})
+		heightmap = append(heightmap, []Risk{})
 		for _, r := range []rune(line) {
-			heightmap[y] = append(heightmap[y], int(r-'0'))
+			heightmap[y] = append(heightmap[y], Risk(r-'0'))
 		}
 	}
 	return heightmap
