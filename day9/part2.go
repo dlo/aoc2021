@@ -67,9 +67,6 @@ func (g *BasinHolder) Initialize(hm HeightMap) {
 	for _, point := range hm.LowPoints() {
 		g.ExpandBasinFromPoint(point)
 	}
-
-	fmt.Println()
-	g.basin.Println()
 }
 
 func (g *BasinHolder) ExpandBasinFromPoint(p Point) {
