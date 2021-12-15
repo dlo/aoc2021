@@ -16,7 +16,16 @@ type PointsWithRisk struct {
 	Risk   int
 }
 
-func (hm HeightMap) IsLowPoint(x, y int) bool {
+func (hm HeightMap) IsValidPoint(point Point) bool {
+	x, y := point.Coordinates()
+	return y >= 0 &&
+		x >= 0 &&
+		y < len(hm) &&
+		x < len(hm[0])
+}
+
+func (hm HeightMap) IsLowPoint(point Point) bool {
+	x, y := point[0], point[1]
 	value := hm[y][x]
 	if y > 0 && hm[y-1][x] <= value ||
 		x > 0 && hm[y][x-1] <= value ||
@@ -38,7 +47,8 @@ func (hm HeightMap) LowPoints() PointsWithRisk {
 	result := PointsWithRisk{[]PointWithRisk{}, 0}
 	for y := range hm {
 		for x := range hm[y] {
-			if hm.IsLowPoint(x, y) {
+			point := [2]int{x, y}
+			if hm.IsLowPoint(point) {
 				risk := hm[y][x] + 1
 				result.Risk += risk
 				result.Points = append(result.Points, PointWithRisk{[2]int{x, y}, risk})

@@ -129,7 +129,7 @@ func main() {
 		}
 
 	case 9:
-		values := day9.GenerateHeightMap("day9/testdata/input.txt")
+		values := day9.GenerateHeightMap("day9/testdata/example_input.txt")
 
 		fmt.Print("Day Nine, ")
 		switch part {
@@ -138,6 +138,7 @@ func main() {
 			fmt.Println("Part One:", points.Risk)
 
 		case 2:
+			values.GenerateBasins()
 			//fmt.Println("Part Two:", values.SumDecodedInputs())
 		}
 	}
