@@ -6,12 +6,13 @@ import (
 )
 
 type HeightMap [][]int
-type LowPoint struct {
-	xy   [2]int
-	risk int
+type Point [2]int
+type PointWithRisk struct {
+	point Point
+	risk  int
 }
-type LowPoints struct {
-	Points []LowPoint
+type PointsWithRisk struct {
+	Points []PointWithRisk
 	Risk   int
 }
 
@@ -33,14 +34,14 @@ func (hm HeightMap) Println() {
 	}
 }
 
-func (hm HeightMap) LowPoints() LowPoints {
-	result := LowPoints{[]LowPoint{}, 0}
+func (hm HeightMap) LowPoints() PointsWithRisk {
+	result := PointsWithRisk{[]PointWithRisk{}, 0}
 	for y := range hm {
 		for x := range hm[y] {
 			if hm.IsLowPoint(x, y) {
 				risk := hm[y][x] + 1
 				result.Risk += risk
-				result.Points = append(result.Points, LowPoint{[2]int{x, y}, risk})
+				result.Points = append(result.Points, PointWithRisk{[2]int{x, y}, risk})
 			}
 		}
 	}
