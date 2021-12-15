@@ -19,6 +19,6 @@ func TestLowPoints(t *testing.T) {
 	for _, tt := range tests {
 		values := GenerateHeightMap(tt.filename)
 		points := values.LowPoints()
-		assert.Equal(t, tt.want, int(points.R))
+		assert.Equal(t, tt.want, points.TotalRisk())
 	}
 }

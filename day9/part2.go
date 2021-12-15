@@ -1,9 +1,11 @@
 package day9
 
 type Basin struct {
-	hm   HeightMap
-	seen []Point
-	x    [][]Point
+	hm    HeightMap
+	seen  []Point
+	basin [][]Point
 }
 
-//func (h BasinGrid)
+func (g Basin) Initialize(hm HeightMap) {
+
+}
