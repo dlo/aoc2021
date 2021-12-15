@@ -122,24 +122,25 @@ func main() {
 		switch part {
 		case 1:
 			break
-			//fmt.Println("Part One:", day8.GenerateSevenSegmentConfiguration(values[0].Patterns))
 
 		case 2:
 			fmt.Println("Part Two:", values.SumDecodedInputs())
 		}
 
 	case 9:
-		values := day9.GenerateHeightMap("day9/testdata/example_input.txt")
+		heightMap := day9.GenerateHeightMap("day9/testdata/example_input.txt")
 
 		fmt.Print("Day Nine, ")
 		switch part {
 		case 1:
-			points := values.LowPoints()
+			points := heightMap.LowPoints()
 			fmt.Println("Part One:", points.TotalRisk())
 
 		case 2:
-			//values.GenerateBasins()
-			//fmt.Println("Part Two:", values.SumDecodedInputs())
+			basin := day9.BasinHolder{}
+			basin.Initialize(heightMap)
+			getBasinsResult := basin.GetBasins()
+			fmt.Println("Part Two:", getBasinsResult.ProductOfSizesOfThreeLargestBasins())
 		}
 	}
 }

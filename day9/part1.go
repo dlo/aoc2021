@@ -1,6 +1,7 @@
 package day9
 
 import (
+	"errors"
 	"fmt"
 	"github.com/dlo/aoc2021/utils"
 )
@@ -18,6 +19,14 @@ func (p Points) TotalRisk() int {
 	return risk
 }
 
+func (p Point) X() (x int) {
+	return p[0]
+}
+
+func (p Point) Y() (x int) {
+	return p[1]
+}
+
 func (p Point) Coordinates() (x, y int) {
 	return p[0], p[1]
 }
@@ -28,6 +37,14 @@ func (p Point) Height() (height int) {
 
 func (p Point) Risk() int {
 	return p.Height() + 1
+}
+
+func (hm HeightMap) PointAt(x int, y int) (Point, error) {
+	if !hm.IsValidPoint([3]int{x, y, -1}) {
+		return [3]int{-1, -1, -1}, errors.New("invalid point")
+	}
+
+	return [3]int{x, y, hm[y][x]}, nil
 }
 
 func (hm HeightMap) IsValidPoint(point Point) bool {
