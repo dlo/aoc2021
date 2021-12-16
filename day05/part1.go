@@ -1,18 +1,18 @@
 package day05
 
 import (
+	"github.com/dlo/aoc2021/day02"
 	"strconv"
 	"strings"
 
-	"github.com/dlo/aoc2021/day2"
 	"github.com/dlo/aoc2021/utils"
 )
 
-func CoordinateFromString(input string) day2.Coordinate {
+func CoordinateFromString(input string) day02.Coordinate {
 	numbers := strings.Split(input, ",")
 	X, _ := strconv.Atoi(numbers[0])
 	Y, _ := strconv.Atoi(numbers[1])
-	return day2.Coordinate{X: X, Y: Y}
+	return day02.Coordinate{X: X, Y: Y}
 }
 
 func ParseLineSegmentFromLine(line string) LineSegment {

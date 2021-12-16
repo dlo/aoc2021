@@ -8,7 +8,7 @@ import (
 func TestCompletionScore(t *testing.T) {
 	tests := []TestCase{
 		{"testdata/example_input.txt", 288957},
-		{"testdata/input.txt", 294195},
+		{"testdata/input.txt", 3490802734},
 	}
 
 	for _, tt := range tests {

@@ -1,14 +1,14 @@
 package day05
 
 import (
-	"github.com/dlo/aoc2021/day2"
+	"github.com/dlo/aoc2021/day02"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 type CoordinateFromStringTestCase struct {
 	input string
-	want  day2.Coordinate
+	want  day02.Coordinate
 }
 
 type ParseLineSegmentFromLineTestCase struct {
@@ -23,8 +23,8 @@ type CountIntersectionsTestCase struct {
 
 func TestCoordinateFromString(t *testing.T) {
 	var tests = []CoordinateFromStringTestCase{
-		{"0,9", day2.Coordinate{X: 0, Y: 9}},
-		{"5,9", day2.Coordinate{X: 5, Y: 9}},
+		{"0,9", day02.Coordinate{X: 0, Y: 9}},
+		{"5,9", day02.Coordinate{X: 5, Y: 9}},
 	}
 
 	for _, tt := range tests {
@@ -36,7 +36,7 @@ func TestCoordinateFromString(t *testing.T) {
 
 func TestParseLineSegmentFromLine(t *testing.T) {
 	var tests = []ParseLineSegmentFromLineTestCase{
-		{"5,5 -> 8,2", LineSegment{day2.Coordinate{X: 5, Y: 5}, day2.Coordinate{X: 8, Y: 2}}},
+		{"5,5 -> 8,2", LineSegment{day02.Coordinate{X: 5, Y: 5}, day02.Coordinate{X: 8, Y: 2}}},
 	}
 
 	for _, tt := range tests {
