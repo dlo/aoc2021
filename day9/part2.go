@@ -6,12 +6,14 @@ import (
 	"sort"
 )
 
+type GetBasinsResult map[Point][]Point
+
 type Basin [][]Point
 
 type BasinHolder struct {
 	hm    HeightMap
 	seen  map[Point]bool
-	basin Basin
+	Basin Basin
 }
 
 func AttributeForHeight(height int) color.Attribute {
@@ -55,12 +57,12 @@ func (g *BasinHolder) Initialize(hm HeightMap) {
 	g.hm = hm
 	g.seen = map[Point]bool{}
 	for range hm {
-		g.basin = append(g.basin, make([]Point, len(hm[0])))
+		g.Basin = append(g.Basin, make([]Point, len(hm[0])))
 	}
 
 	for y := range hm {
 		for x := range hm[y] {
-			g.basin[y][x], _ = hm.PointAt(x, y)
+			g.Basin[y][x], _ = hm.PointAt(x, y)
 		}
 	}
 
@@ -81,13 +83,11 @@ func (g *BasinHolder) ExpandBasinFromPoint(p Point) {
 		neighbor, err := g.hm.PointAt(x, y)
 
 		if err == nil && neighbor.Height() < 9 {
-			g.basin[y][x] = g.basin[p.Y()][p.X()]
+			g.Basin[y][x] = g.Basin[p.Y()][p.X()]
 			g.ExpandBasinFromPoint(neighbor)
 		}
 	}
 }
-
-type GetBasinsResult map[Point][]Point
 
 func (r GetBasinsResult) ProductOfSizesOfThreeLargestBasins() int {
 	var sizes []int
@@ -96,15 +96,14 @@ func (r GetBasinsResult) ProductOfSizesOfThreeLargestBasins() int {
 	}
 
 	sort.Sort(sort.Reverse(sort.IntSlice(sizes)))
-
 	return sizes[0] * sizes[1] * sizes[2]
 }
 
 func (g *BasinHolder) GetBasins() GetBasinsResult {
 	results := GetBasinsResult{}
-	for y := range g.basin {
-		for x := range g.basin[y] {
-			points := results[g.basin[y][x]]
+	for y := range g.Basin {
+		for x := range g.Basin[y] {
+			points := results[g.Basin[y][x]]
 			point, _ := g.hm.PointAt(x, y)
 			if point.Height() == 9 {
 				continue
@@ -115,7 +114,7 @@ func (g *BasinHolder) GetBasins() GetBasinsResult {
 			} else {
 				points = append(points, point)
 			}
-			results[g.basin[y][x]] = points
+			results[g.Basin[y][x]] = points
 		}
 	}
 	return results

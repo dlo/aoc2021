@@ -52,6 +52,12 @@ func (hm HeightMap) IsValidPoint(point Point) bool {
 	return y >= 0 && x >= 0 && y < len(hm) && x < len(hm[0])
 }
 
+func (hm HeightMap) Println() {
+	for y := range hm {
+		fmt.Println(hm[y])
+	}
+}
+
 func (hm HeightMap) IsLowPoint(point Point) bool {
 	x, y := point.Coordinates()
 	height := point.Height()
@@ -63,12 +69,6 @@ func (hm HeightMap) IsLowPoint(point Point) bool {
 	}
 
 	return true
-}
-
-func (hm HeightMap) Println() {
-	for y := range hm {
-		fmt.Println(hm[y])
-	}
 }
 
 func (hm HeightMap) LowPoints() Points {

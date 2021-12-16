@@ -128,7 +128,7 @@ func main() {
 		}
 
 	case 9:
-		heightMap := day9.GenerateHeightMap("day9/testdata/example_input.txt")
+		heightMap := day9.GenerateHeightMap("day9/testdata/input.txt")
 
 		fmt.Print("Day Nine, ")
 		switch part {
@@ -140,6 +140,7 @@ func main() {
 			basin := day9.BasinHolder{}
 			basin.Initialize(heightMap)
 			getBasinsResult := basin.GetBasins()
+			basin.Basin.Println()
 			fmt.Println("Part Two:", getBasinsResult.ProductOfSizesOfThreeLargestBasins())
 		}
 	}
