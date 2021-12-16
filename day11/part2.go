@@ -1,7 +1,7 @@
 package day11
 
 func (g OctopusGrid) IsSynchronous() bool {
-	return len(g.flashed) == len(g.grid)*len(g.grid[0])
+	return len(g.flashed) == g.grid.Area()
 }
 
 func (g *OctopusGrid) FirstSynchronousStep() int {

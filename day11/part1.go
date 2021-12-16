@@ -7,21 +7,16 @@ import (
 )
 
 type EnergyLevel int
-type Point [2]int
 type OctopusGrid struct {
-	flashed    map[Point]bool
-	grid       [][]EnergyLevel
+	flashed    map[utils.Point]bool
+	grid       utils.IntMatrix
 	flashCount int
-}
-
-func (p Point) Coordinates() (x int, y int) {
-	return p[0], p[1]
 }
 
 func (g OctopusGrid) Println() {
 	for y := range g.grid {
 		for x := range g.grid[y] {
-			point := Point{x, y}
+			point := utils.Point{x, y}
 			if g.flashed[point] {
 				color.New(color.FgRed).PrintFunc()(g.EnergyLevel(point))
 			} else {
@@ -32,46 +27,15 @@ func (g OctopusGrid) Println() {
 	}
 }
 
-func (g OctopusGrid) IsValidXY(x, y int) bool {
-	return x >= 0 && y >= 0 && y < len(g.grid) && x < len(g.grid[y])
+func (g OctopusGrid) Neighbors(p utils.Point) []utils.Point {
+	return g.grid.NeighborsForXY(p.Coordinates())
 }
 
-func (g OctopusGrid) IsValidPoint(p Point) bool {
-	x, y := p.Coordinates()
-	return g.IsValidXY(x, y)
+func (g OctopusGrid) EnergyLevel(point utils.Point) EnergyLevel {
+	return EnergyLevel(g.grid.ValueAt(point))
 }
 
-func (g OctopusGrid) NeighborsForXY(x, y int) []Point {
-	points := []Point{
-		{x - 1, y - 1},
-		{x - 1, y},
-		{x - 1, y + 1},
-		{x, y - 1},
-		{x, y + 1},
-		{x + 1, y - 1},
-		{x + 1, y},
-		{x + 1, y + 1},
-	}
-
-	var validPoints []Point
-	for _, point := range points {
-		if g.IsValidPoint(point) {
-			validPoints = append(validPoints, point)
-		}
-	}
-	return validPoints
-}
-
-func (g OctopusGrid) Neighbors(p Point) []Point {
-	return g.NeighborsForXY(p.Coordinates())
-}
-
-func (g OctopusGrid) EnergyLevel(point Point) EnergyLevel {
-	x, y := point.Coordinates()
-	return g.grid[y][x]
-}
-
-func (g *OctopusGrid) IncreaseEnergy(p Point) {
+func (g *OctopusGrid) IncreaseEnergy(p utils.Point) {
 	if g.flashed[p] {
 		return
 	}
@@ -84,17 +48,17 @@ func (g *OctopusGrid) IncreaseEnergy(p Point) {
 	}
 }
 
-func (g *OctopusGrid) Flash(p Point) {
+func (g *OctopusGrid) Flash(p utils.Point) {
 	for _, neighbor := range g.Neighbors(p) {
 		g.IncreaseEnergy(neighbor)
 	}
 }
 
 func (g *OctopusGrid) Step() {
-	g.flashed = map[Point]bool{}
+	g.flashed = map[utils.Point]bool{}
 	for j := range g.grid {
 		for i := range g.grid[j] {
-			g.IncreaseEnergy(Point{i, j})
+			g.IncreaseEnergy(utils.Point{i, j})
 		}
 	}
 
@@ -114,13 +78,13 @@ func (g *OctopusGrid) StepByCount(count int) {
 
 func ReadOctopusGrid(filename string) OctopusGrid {
 	lines := utils.ReadLinesFromFile(filename)
-	grid := make([][]EnergyLevel, len(lines))
+	grid := make([][]int, len(lines))
 	for i, line := range lines {
-		var row []EnergyLevel
+		var row []int
 		for _, r := range []rune(line) {
-			row = append(row, EnergyLevel(r-'0'))
+			row = append(row, int(r-'0'))
 		}
 		grid[i] = row
 	}
-	return OctopusGrid{map[Point]bool{}, grid, 0}
+	return OctopusGrid{map[utils.Point]bool{}, grid, 0}
 }
