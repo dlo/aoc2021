@@ -13,8 +13,6 @@ func TestFlashCount(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		grid := ReadOctopusGrid(tt.filename)
-		grid.StepByCount(100)
-		assert.Equal(t, tt.want, grid.flashCount)
+		assert.Equal(t, tt.Want, 0)
 	}
 }

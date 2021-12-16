@@ -1,23 +1,19 @@
 package day10
 
 import (
+	"github.com/dlo/aoc2021/utils"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-type TestCase struct {
-	filename string
-	want     int
-}
-
 func TestSyntaxErrorScore(t *testing.T) {
-	tests := []TestCase{
+	tests := []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 26397},
 		{"testdata/input.txt", 294195},
 	}
 
 	for _, tt := range tests {
-		subsystem := GenerateRawSubsystemFromFile(tt.filename)
-		assert.Equal(t, tt.want, subsystem.SyntaxErrorScore())
+		subsystem := GenerateRawSubsystemFromFile(tt.Filename)
+		assert.Equal(t, tt.Want, subsystem.SyntaxErrorScore())
 	}
 }

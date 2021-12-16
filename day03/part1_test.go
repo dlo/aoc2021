@@ -6,20 +6,15 @@ import (
 	"testing"
 )
 
-type CalculateGammaRateTestCase struct {
-	filename string
-	want int
-}
-
 func TestCalculateGammaRate(t *testing.T) {
-	var tests = []CalculateGammaRateTestCase{
+	var tests = []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 198},
 		{"testdata/input.txt", 3912944},
 	}
 
 	for _, tt := range tests {
-		reportValues, length := utils.BinaryLinesFromFile(tt.filename)
+		reportValues, length := utils.BinaryLinesFromFile(tt.Filename)
 		report := DiagnosticReport{reportValues, length}
-		assert.EqualValues(t, tt.want, int(report.CalculatePowerConsumption()))
+		assert.EqualValues(t, tt.Want, int(report.CalculatePowerConsumption()))
 	}
 }

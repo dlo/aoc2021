@@ -2,6 +2,7 @@ package day05
 
 import (
 	"github.com/dlo/aoc2021/day02"
+	"github.com/dlo/aoc2021/utils"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -14,11 +15,6 @@ type CoordinateFromStringTestCase struct {
 type ParseLineSegmentFromLineTestCase struct {
 	input string
 	want  LineSegment
-}
-
-type CountIntersectionsTestCase struct {
-	filename string
-	want     int
 }
 
 func TestCoordinateFromString(t *testing.T) {
@@ -49,27 +45,27 @@ func TestParseLineSegmentFromLine(t *testing.T) {
 }
 
 func TestCountIntersections(t *testing.T) {
-	var tests = []CountIntersectionsTestCase{
+	var tests = []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 5},
 		{"testdata/input.txt", 5585},
 	}
 
 	for _, tt := range tests {
-		measurements := ParseHydrothermalVentMeasurements(tt.filename)
+		measurements := ParseHydrothermalVentMeasurements(tt.Filename)
 		measurements.Process(false)
-		assert.Equal(t, tt.want, measurements.CountIntersections())
+		assert.Equal(t, tt.Want, measurements.CountIntersections())
 	}
 }
 
 func TestCountIntersectionsWithDiagonals(t *testing.T) {
-	var tests = []CountIntersectionsTestCase{
+	var tests = []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 12},
 		{"testdata/input.txt", 17193},
 	}
 
 	for _, tt := range tests {
-		measurements := ParseHydrothermalVentMeasurements(tt.filename)
+		measurements := ParseHydrothermalVentMeasurements(tt.Filename)
 		measurements.Process(true)
-		assert.Equal(t, tt.want, measurements.CountIntersections())
+		assert.Equal(t, tt.Want, measurements.CountIntersections())
 	}
 }
