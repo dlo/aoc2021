@@ -10,7 +10,7 @@ type TestCase struct {
 	want     int
 }
 
-func TestSyntaxErrorScore(t *testing.T) {
+func TestFlashCount(t *testing.T) {
 	tests := []TestCase{
 		{"testdata/example_input.txt", 1656},
 		{"testdata/input.txt", 1721},

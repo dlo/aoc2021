@@ -160,19 +160,22 @@ func main() {
 		}
 
 	case 11:
-		grid := day11.ReadOctopusGrid("day11/testdata/example_input.txt")
+		grid := day11.ReadOctopusGrid("day11/testdata/input.txt")
 
 		fmt.Print("Day Eleven, ")
 		switch part {
 		case 1:
 			fmt.Print("Part 1")
 			fmt.Println()
-			grid.StepByCount(20)
+			grid.StepByCount(100)
 			grid.Println()
-			//fmt.Println("Part One:", subsystem.SyntaxErrorScore())
 
 		case 2:
-			//fmt.Println("Part Two:", subsystem.CompletionScore())
+			fmt.Print("Part 2")
+			fmt.Println()
+			//grid.StepByCount(193)
+			fmt.Println(grid.FirstSynchronousStep())
+			grid.Println()
 		}
 	}
 }
