@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/dlo/aoc2021/day1"
+	"github.com/dlo/aoc2021/day10"
 	"github.com/dlo/aoc2021/day2"
 	"github.com/dlo/aoc2021/day3"
 	"github.com/dlo/aoc2021/day4"
@@ -142,6 +143,19 @@ func main() {
 			getBasinsResult := basin.GetBasins()
 			basin.Basin.Println()
 			fmt.Println("Part Two:", getBasinsResult.ProductOfSizesOfThreeLargestBasins())
+		}
+
+	case 10:
+		subsystem := day10.GenerateRawSubsystemFromFile("day10/testdata/example_input.txt")
+
+		fmt.Print("Day Ten, ")
+		switch part {
+		case 1:
+			fmt.Println()
+			subsystem.Println()
+
+		case 2:
+			break
 		}
 	}
 }
