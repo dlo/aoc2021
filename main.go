@@ -180,16 +180,15 @@ func main() {
 		}
 
 	case 12:
-		caveMap := day12.ImportCaveMap("day12/testdata/example_input_1.txt")
+		caveMap := day12.ImportCaveMap("day12/testdata/input.txt")
 
 		fmt.Print("Day Twelve, ")
 		switch part {
 		case 1:
-			fmt.Println("Part 1")
-			caveMap.Println()
-			fmt.Println(caveMap.CountUniquePaths())
+			fmt.Println("Part 1:", caveMap.CountUniquePaths(false))
 
 		case 2:
+			fmt.Println("Part 2:", caveMap.CountUniquePaths(true))
 		}
 	}
 }
