@@ -13,6 +13,7 @@ import (
 	"github.com/dlo/aoc2021/day08"
 	"github.com/dlo/aoc2021/day09"
 	"github.com/dlo/aoc2021/day10"
+	"github.com/dlo/aoc2021/day11"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -39,7 +40,7 @@ func main() {
 		case 2:
 			fmt.Println("Part Two: ", day01.Part1CountIncreases(day01.Part2GenerateSlidingWindows(items)))
 		}
-		
+
 	case 2:
 		commands := day02.Part1ParseCommands("day2/testdata/input.txt")
 
@@ -156,6 +157,22 @@ func main() {
 
 		case 2:
 			fmt.Println("Part Two:", subsystem.CompletionScore())
+		}
+
+	case 11:
+		grid := day11.ReadOctopusGrid("day11/testdata/example_input.txt")
+
+		fmt.Print("Day Eleven, ")
+		switch part {
+		case 1:
+			fmt.Print("Part 1")
+			fmt.Println()
+			grid.StepByCount(20)
+			grid.Println()
+			//fmt.Println("Part One:", subsystem.SyntaxErrorScore())
+
+		case 2:
+			//fmt.Println("Part Two:", subsystem.CompletionScore())
 		}
 	}
 }
