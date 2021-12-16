@@ -32,3 +32,4 @@ test:
 	go test github.com/dlo/aoc2021/day08 -cover
 	go test github.com/dlo/aoc2021/day09 -cover
 	go test github.com/dlo/aoc2021/day10 -cover
+	go test github.com/dlo/aoc2021/day11 -cover
