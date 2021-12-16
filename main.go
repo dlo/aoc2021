@@ -187,7 +187,7 @@ func main() {
 		case 1:
 			fmt.Println("Part 1")
 			caveMap.Println()
-			fmt.Println(caveMap.CountUniquePaths(0))
+			fmt.Println(caveMap.CountUniquePaths())
 
 		case 2:
 		}

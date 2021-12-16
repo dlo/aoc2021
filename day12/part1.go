@@ -58,16 +58,20 @@ func (c RawConnection) ParseConnection() (fst Cave, snd Cave) {
 	return Cave(input[:idx]), Cave(input[idx+1:])
 }
 
-func (cs CaveStorage) CountUniquePaths(y int) int {
+func (cs CaveStorage) CountUniquePaths(canVisitSmallCavesTwice bool) int {
 	startId := cs.ids["start"]
-	return cs.InternalCountUniquePaths(startId, []Cave{"start"}, make(map[int]bool))
+	return cs.InternalCountUniquePaths(startId, []Cave{}, canVisitSmallCavesTwice, make(map[int]bool))
 }
 
-func (cs CaveStorage) InternalCountUniquePaths(y int, path []Cave, visited Visited) int {
+func (cs CaveStorage) InternalCountUniquePaths(y int, path []Cave, canVisitSmallCavesTwice bool, visited Visited) int {
 	//y = start
 	cave := cs.idsToCaves[y]
 	if visited[y] && !cave.IsBig() {
-		return 0
+		if cave == "start" || !canVisitSmallCavesTwice {
+			return 0
+		}
+
+		canVisitSmallCavesTwice = false
 	}
 
 	visited[y] = true
@@ -85,7 +89,7 @@ func (cs CaveStorage) InternalCountUniquePaths(y int, path []Cave, visited Visit
 			//fmt.Println(path)
 			sum += 1
 		} else {
-			sum += cs.InternalCountUniquePaths(x, path, visited.Copy())
+			sum += cs.InternalCountUniquePaths(x, path, canVisitSmallCavesTwice, visited.Copy())
 		}
 	}
 	return sum
