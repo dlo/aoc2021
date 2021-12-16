@@ -15,6 +15,7 @@ import (
 	"github.com/dlo/aoc2021/day10"
 	"github.com/dlo/aoc2021/day11"
 	"github.com/dlo/aoc2021/day12"
+	"github.com/dlo/aoc2021/day13"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -189,6 +190,21 @@ func main() {
 
 		case 2:
 			fmt.Println("Part 2:", caveMap.CountUniquePaths(true))
+		}
+
+	case 13:
+		grid := day13.ImportGrid("day13/testdata/input.txt")
+
+		fmt.Print("Day Thirteen, ")
+		switch part {
+		case 1:
+			fmt.Println("Part 1:", grid.Fold().CountDots())
+
+		case 2:
+			grid = grid.FoldAll()
+			fmt.Println("Part 2:")
+			fmt.Println()
+			grid.Println()
 		}
 	}
 }
