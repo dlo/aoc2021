@@ -6,13 +6,16 @@ import (
 	"testing"
 )
 
-func TestFlashCount(t *testing.T) {
+func TestCountUniquePaths(t *testing.T) {
 	tests := []utils.SimpleTestCase{
-		{"testdata/example_input.txt", 1656},
-		{"testdata/input.txt", 1721},
+		{"testdata/example_input_1.txt", 10},
+		{"testdata/example_input_2.txt", 19},
+		{"testdata/example_input_3.txt", 226},
+		{"testdata/input.txt", 3708},
 	}
 
 	for _, tt := range tests {
-		assert.Equal(t, tt.Want, 0)
+		caveMap := ImportCaveMap(tt.Filename)
+		assert.Equal(t, tt.Want, caveMap.CountUniquePaths(0))
 	}
 }

@@ -14,6 +14,7 @@ import (
 	"github.com/dlo/aoc2021/day09"
 	"github.com/dlo/aoc2021/day10"
 	"github.com/dlo/aoc2021/day11"
+	"github.com/dlo/aoc2021/day12"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -176,6 +177,19 @@ func main() {
 			//grid.StepByCount(193)
 			fmt.Println(grid.FirstSynchronousStep())
 			grid.Println()
+		}
+
+	case 12:
+		caveMap := day12.ImportCaveMap("day12/testdata/example_input_1.txt")
+
+		fmt.Print("Day Twelve, ")
+		switch part {
+		case 1:
+			fmt.Println("Part 1")
+			caveMap.Println()
+			fmt.Println(caveMap.CountUniquePaths(0))
+
+		case 2:
 		}
 	}
 }

@@ -7,6 +7,14 @@ import (
 type Point [2]int
 type IntMatrix [][]int
 
+func NewIntMatrix(height int, width int) IntMatrix {
+	var m IntMatrix = make([][]int, height)
+	for j := range m {
+		m[j] = make([]int, width)
+	}
+	return m
+}
+
 func (m IntMatrix) Neighbors(p Point) []Point {
 	return m.NeighborsForXY(p.Coordinates())
 }
