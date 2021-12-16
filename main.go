@@ -146,16 +146,15 @@ func main() {
 		}
 
 	case 10:
-		subsystem := day10.GenerateRawSubsystemFromFile("day10/testdata/example_input.txt")
+		subsystem := day10.GenerateRawSubsystemFromFile("day10/testdata/input.txt")
 
 		fmt.Print("Day Ten, ")
 		switch part {
 		case 1:
-			fmt.Println()
-			subsystem.Println()
+			fmt.Println("Part One:", subsystem.SyntaxErrorScore())
 
 		case 2:
-			break
+			fmt.Println("Part Two:", subsystem.CompletionScore())
 		}
 	}
 }

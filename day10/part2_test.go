@@ -5,19 +5,14 @@ import (
 	"testing"
 )
 
-type TestCase struct {
-	filename string
-	want     int
-}
-
-func TestSyntaxErrorScore(t *testing.T) {
+func TestCompletionScore(t *testing.T) {
 	tests := []TestCase{
-		{"testdata/example_input.txt", 26397},
+		{"testdata/example_input.txt", 288957},
 		{"testdata/input.txt", 294195},
 	}
 
 	for _, tt := range tests {
 		subsystem := GenerateRawSubsystemFromFile(tt.filename)
-		assert.Equal(t, tt.want, subsystem.SyntaxErrorScore())
+		assert.Equal(t, tt.want, subsystem.CompletionScore())
 	}
 }

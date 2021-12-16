@@ -28,7 +28,7 @@ func MatchingDelimiters() map[rune]rune {
 	}
 }
 
-func DelimiterScores() map[rune]int {
+func SyntaxErrorScore() map[rune]int {
 	return map[rune]int{
 		')': 3,
 		']': 57,
@@ -40,7 +40,7 @@ func DelimiterScores() map[rune]int {
 func (c RawChunks) SyntaxErrorScore() int {
 	queue := LIFOQueue{}
 	delimiters := MatchingDelimiters()
-	scores := DelimiterScores()
+	scores := SyntaxErrorScore()
 	for _, r := range []rune(c) {
 		switch r {
 		case '(', '[', '{', '<':
