@@ -43,12 +43,12 @@ func (g *OctopusGrid) IncreaseEnergy(p utils.Point) {
 	x, y := p.Coordinates()
 	g.grid[y][x]++
 	if g.EnergyLevel(p) > 9 {
-		g.flashed[p] = true
 		g.Flash(p)
 	}
 }
 
 func (g *OctopusGrid) Flash(p utils.Point) {
+	g.flashed[p] = true
 	for _, neighbor := range g.Neighbors(p) {
 		g.IncreaseEnergy(neighbor)
 	}
