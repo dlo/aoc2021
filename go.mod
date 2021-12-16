@@ -4,7 +4,6 @@ go 1.17
 
 require (
 	github.com/fatih/color v1.13.0
-	github.com/golang-collections/collections v0.0.0-20130729185459-604e922904d3
 	github.com/psampaz/slice v0.2.0
 	github.com/stretchr/testify v1.7.0
 )
