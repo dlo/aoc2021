@@ -1,4 +1,4 @@
-package day2
+package day02
 
 type Status struct {
 	coordinate Coordinate

@@ -1,4 +1,4 @@
-package day2
+package day02
 
 func Part1CalculateCoordinateFromCommands(commands []Command) Coordinate {
 	position := Coordinate{0, 0}

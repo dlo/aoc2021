@@ -1,4 +1,4 @@
-package day1
+package day01
 
 func Part1CountIncreases(depths []int) int {
 	if len(depths) < 2 {

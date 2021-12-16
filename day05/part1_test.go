@@ -1,4 +1,4 @@
-package day5
+package day05
 
 import (
 	"github.com/dlo/aoc2021/day2"

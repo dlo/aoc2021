@@ -1,13 +1,13 @@
-package day5
+package day05
 
 import (
-	"github.com/dlo/aoc2021/day2"
+	"github.com/dlo/aoc2021/day02"
 	"github.com/dlo/aoc2021/utils"
 )
 
 type LineSegment struct {
-	p1 day2.Coordinate
-	p2 day2.Coordinate
+	p1 day02.Coordinate
+	p2 day02.Coordinate
 }
 
 func (s *LineSegment) MinX() int {

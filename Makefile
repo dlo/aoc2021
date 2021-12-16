@@ -22,12 +22,13 @@ build:
 .PHONY: test
 test:
 	go test github.com/dlo/aoc2021/utils -cover
-	go test github.com/dlo/aoc2021/day1 -cover
-	go test github.com/dlo/aoc2021/day2 -cover
-	go test github.com/dlo/aoc2021/day3 -cover
-	go test github.com/dlo/aoc2021/day4 -cover
-	go test github.com/dlo/aoc2021/day5 -cover
-	go test github.com/dlo/aoc2021/day6 -cover
-	go test github.com/dlo/aoc2021/day7 -cover
-	go test github.com/dlo/aoc2021/day8 -cover
-	go test github.com/dlo/aoc2021/day9 -cover
+	go test github.com/dlo/aoc2021/day01 -cover
+	go test github.com/dlo/aoc2021/day02 -cover
+	go test github.com/dlo/aoc2021/day03 -cover
+	go test github.com/dlo/aoc2021/day04 -cover
+	go test github.com/dlo/aoc2021/day05 -cover
+	go test github.com/dlo/aoc2021/day06 -cover
+	go test github.com/dlo/aoc2021/day07 -cover
+	go test github.com/dlo/aoc2021/day08 -cover
+	go test github.com/dlo/aoc2021/day09 -cover
+	go test github.com/dlo/aoc2021/day10 -cover
