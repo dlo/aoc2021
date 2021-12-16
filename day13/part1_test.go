@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestCountUniquePathsWithRepeatVisitsToSmallCaves(t *testing.T) {
+func TestCountDots(t *testing.T) {
 	tests := []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 17},
 		{"testdata/input.txt", 751},

@@ -16,6 +16,7 @@ import (
 	"github.com/dlo/aoc2021/day11"
 	"github.com/dlo/aoc2021/day12"
 	"github.com/dlo/aoc2021/day13"
+	"github.com/dlo/aoc2021/day14"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -30,11 +31,11 @@ func init() {
 func main() {
 	flag.Parse()
 
+	fmt.Printf("Day %d, ", day)
 	switch day {
 	case 1:
 		items := utils.IntegerLinesFromFile("day1/day1_input.txt")
 
-		fmt.Print("Day One, ")
 		switch part {
 		case 1:
 			fmt.Println("Part One: ", day01.Part1CountIncreases(items))
@@ -46,7 +47,6 @@ func main() {
 	case 2:
 		commands := day02.Part1ParseCommands("day2/testdata/input.txt")
 
-		fmt.Print("Day Two, ")
 		switch part {
 		case 1:
 			position := day02.Part1CalculateCoordinateFromCommands(commands)
@@ -60,7 +60,6 @@ func main() {
 		reportValues, length := utils.BinaryLinesFromFile("day3/testdata/input.txt")
 		report := day03.DiagnosticReport{Numbers: reportValues, Length: length}
 
-		fmt.Print("Day Three, ")
 		switch part {
 		case 1:
 			fmt.Println("Part One: ", int(report.CalculatePowerConsumption()))
@@ -69,7 +68,6 @@ func main() {
 		}
 	case 4:
 		result := day04.ParseBingoCardDataFromFile("day4/testdata/input.txt")
-		fmt.Print("Day Four, ")
 		switch part {
 		case 1:
 			fmt.Println(result.FindWinningScore())
@@ -81,7 +79,6 @@ func main() {
 	case 5:
 		measurements := day05.ParseHydrothermalVentMeasurements("day5/testdata/example_input.txt")
 
-		fmt.Print("Day Five, ")
 		switch part {
 		case 1:
 			measurements.Process(false)
@@ -94,8 +91,6 @@ func main() {
 
 	case 6:
 		ages := day06.ParseFishFile("day6/testdata/input.txt")
-
-		fmt.Print("Day Six, ")
 		switch part {
 		case 1:
 			size := day06.CalculateSchoolSizeAfterNDays(ages, 80)
@@ -108,8 +103,6 @@ func main() {
 
 	case 7:
 		positions := day07.ParseHorizontalPositions("day7/testdata/input.txt")
-
-		fmt.Print("Day Seven, ")
 		switch part {
 		case 1:
 			position := day07.CalculateCheapestPosition(positions, day07.Part1CalculateFuelUsageForDelta)
@@ -122,8 +115,6 @@ func main() {
 
 	case 8:
 		values := day08.ParseDigitsAndOutputValues("day8/testdata/input.txt")
-
-		fmt.Print("Day Eight, ")
 		switch part {
 		case 1:
 			break
@@ -134,8 +125,6 @@ func main() {
 
 	case 9:
 		heightMap := day09.GenerateHeightMap("day9/testdata/input.txt")
-
-		fmt.Print("Day Nine, ")
 		switch part {
 		case 1:
 			points := heightMap.LowPoints()
@@ -151,8 +140,6 @@ func main() {
 
 	case 10:
 		subsystem := day10.GenerateRawSubsystemFromFile("day10/testdata/input.txt")
-
-		fmt.Print("Day Ten, ")
 		switch part {
 		case 1:
 			fmt.Println("Part One:", subsystem.SyntaxErrorScore())
@@ -163,8 +150,6 @@ func main() {
 
 	case 11:
 		grid := day11.ReadOctopusGrid("day11/testdata/input.txt")
-
-		fmt.Print("Day Eleven, ")
 		switch part {
 		case 1:
 			fmt.Print("Part 1")
@@ -175,15 +160,13 @@ func main() {
 		case 2:
 			fmt.Print("Part 2")
 			fmt.Println()
-			//grid.StepByCount(193)
+			//rules.StepByCount(193)
 			fmt.Println(grid.FirstSynchronousStep())
 			grid.Println()
 		}
 
 	case 12:
 		caveMap := day12.ImportCaveMap("day12/testdata/input.txt")
-
-		fmt.Print("Day Twelve, ")
 		switch part {
 		case 1:
 			fmt.Println("Part 1:", caveMap.CountUniquePaths(false))
@@ -194,8 +177,6 @@ func main() {
 
 	case 13:
 		grid := day13.ImportGrid("day13/testdata/input.txt")
-
-		fmt.Print("Day Thirteen, ")
 		switch part {
 		case 1:
 			fmt.Println("Part 1:", grid.Fold().CountDots())
@@ -205,6 +186,16 @@ func main() {
 			fmt.Println("Part 2:")
 			fmt.Println()
 			grid.Println()
+		}
+
+	case 14:
+		rules := day14.ImportRules("day14/testdata/input.txt")
+		switch part {
+		case 1:
+			rules.StepCount(10)
+			fmt.Println("Part 1: ", rules.DifferenceOfMostCommonElementFromLeastCommonElement())
+
+		case 2:
 		}
 	}
 }
