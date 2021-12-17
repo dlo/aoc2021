@@ -19,25 +19,6 @@ func (instructions PolymerGenerationInstructions) Println() {
 	fmt.Println(instructions.polymer)
 }
 
-func (instructions PolymerGenerationInstructions) DifferenceOfMostCommonElementFromLeastCommonElement() int {
-	elements := make(map[rune]int)
-	for _, element := range []rune(instructions.polymer) {
-		elements[element]++
-	}
-
-	mostCommonCount := elements['N']
-	leastCommonCount := elements['N']
-	for _, v := range elements {
-		if v > mostCommonCount {
-			mostCommonCount = v
-		} else if v < leastCommonCount {
-			leastCommonCount = v
-		}
-	}
-
-	return mostCommonCount - leastCommonCount
-}
-
 func (r RawPairInsertionRule) Parse() (string, rune, error) {
 	str := string(r)
 	if strings.Index(str, "->") == -1 {
@@ -72,6 +53,25 @@ func (instructions *PolymerGenerationInstructions) Step() {
 	}
 	template.WriteByte(lastPair)
 	instructions.polymer = PolymerTemplate(template.String())
+}
+
+func (instructions PolymerGenerationInstructions) DifferenceOfMostCommonElementFromLeastCommonElement() int {
+	elements := make(map[rune]int)
+	for _, element := range []rune(instructions.polymer) {
+		elements[element]++
+	}
+
+	mostCommonCount := elements['N']
+	leastCommonCount := elements['N']
+	for _, v := range elements {
+		if v > mostCommonCount {
+			mostCommonCount = v
+		} else if v < leastCommonCount {
+			leastCommonCount = v
+		}
+	}
+
+	return mostCommonCount - leastCommonCount
 }
 
 func ImportRules(filename string) PolymerGenerationInstructions {

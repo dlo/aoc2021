@@ -16,12 +16,6 @@ func (instructions PolymerGenerationInstructions) NewFastInstructions() FastPoly
 	return FastPolymerGenerationInstructions{instructions.rules, pairs}
 }
 
-func (instructions *FastPolymerGenerationInstructions) StepCount(iterations int) {
-	for i := 0; i < iterations; i++ {
-		instructions.Step()
-	}
-}
-
 func (instructions FastPolymerGenerationInstructions) Println() {
 	for k, v := range instructions.pairs {
 		for i := 0; i < v; i++ {
@@ -50,6 +44,12 @@ func (instructions FastPolymerGenerationInstructions) DifferenceOfMostCommonElem
 	}
 
 	return mostCommonCount - leastCommonCount
+}
+
+func (instructions *FastPolymerGenerationInstructions) StepCount(iterations int) {
+	for i := 0; i < iterations; i++ {
+		instructions.Step()
+	}
 }
 
 func (instructions *FastPolymerGenerationInstructions) Step() {
