@@ -8,8 +8,8 @@ import (
 
 func TestDifferenceOfMostCommonElementFromLeastCommonElement40Steps(t *testing.T) {
 	tests := []utils.SimpleTestCase{
-		{"testdata/example_input.txt", 1588},
-		{"testdata/input.txt", 2435},
+		{"testdata/example_input.txt", 2188189693529},
+		{"testdata/input.txt", 2587447599164},
 	}
 
 	for _, tt := range tests {
