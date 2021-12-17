@@ -7,6 +7,21 @@ type FastPolymerGenerationInstructions struct {
 	pairs map[string]int
 }
 
+func (instructions PolymerGenerationInstructions) NewFastInstructions() FastPolymerGenerationInstructions {
+	pairs := make(map[string]int)
+	for _, pair := range instructions.TemplatePairs() {
+		pairs[pair]++
+	}
+
+	return FastPolymerGenerationInstructions{instructions.rules, pairs}
+}
+
+func (instructions *FastPolymerGenerationInstructions) StepCount(iterations int) {
+	for i := 0; i < iterations; i++ {
+		instructions.Step()
+	}
+}
+
 func (instructions FastPolymerGenerationInstructions) Println() {
 	for k, v := range instructions.pairs {
 		for i := 0; i < v; i++ {
@@ -35,21 +50,6 @@ func (instructions FastPolymerGenerationInstructions) DifferenceOfMostCommonElem
 	}
 
 	return mostCommonCount - leastCommonCount
-}
-
-func (instructions PolymerGenerationInstructions) NewFastInstructions() FastPolymerGenerationInstructions {
-	pairs := make(map[string]int)
-	for _, pair := range instructions.TemplatePairs() {
-		pairs[pair]++
-	}
-
-	return FastPolymerGenerationInstructions{instructions.rules, pairs}
-}
-
-func (instructions *FastPolymerGenerationInstructions) StepCount(iterations int) {
-	for i := 0; i < iterations; i++ {
-		instructions.Step()
-	}
 }
 
 func (instructions *FastPolymerGenerationInstructions) Step() {
