@@ -17,6 +17,7 @@ import (
 	"github.com/dlo/aoc2021/day12"
 	"github.com/dlo/aoc2021/day13"
 	"github.com/dlo/aoc2021/day14"
+	"github.com/dlo/aoc2021/day15"
 	"github.com/dlo/aoc2021/utils"
 )
 
@@ -160,7 +161,7 @@ func main() {
 		case 2:
 			fmt.Print("Part 2")
 			fmt.Println()
-			//rules.StepByCount(193)
+			//cavern.StepByCount(193)
 			fmt.Println(grid.FirstSynchronousStep())
 			grid.Println()
 		}
@@ -189,7 +190,7 @@ func main() {
 		}
 
 	case 14:
-		rules := day14.ImportRules("day14/testdata/example_input.txt")
+		rules := day14.ImportRules("day14/testdata/input.txt")
 		switch part {
 		case 1:
 			rules.StepCount(10)
@@ -197,8 +198,18 @@ func main() {
 
 		case 2:
 			fastRules := rules.NewFastInstructions()
-			fastRules.StepCount(10)
+			fastRules.StepCount(40)
 			fmt.Println("Part 2: ", fastRules.DifferenceOfMostCommonElementFromLeastCommonElement())
+		}
+
+	case 15:
+		cavern := day15.ImportCavernData("day15/testdata/example_input.txt")
+		switch part {
+		case 1:
+			fmt.Println("Part 1: ")
+			cavern.Println()
+
+		case 2:
 		}
 	}
 }
