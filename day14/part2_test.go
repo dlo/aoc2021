@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestDifferenceOfMostCommonElementFromLeastCommonElement(t *testing.T) {
+func TestDifferenceOfMostCommonElementFromLeastCommonElement40Steps(t *testing.T) {
 	tests := []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 1588},
 		{"testdata/input.txt", 2435},
@@ -14,7 +14,8 @@ func TestDifferenceOfMostCommonElementFromLeastCommonElement(t *testing.T) {
 
 	for _, tt := range tests {
 		rules := ImportRules(tt.Filename)
-		rules.StepCount(10)
-		assert.Equal(t, tt.Want, rules.DifferenceOfMostCommonElementFromLeastCommonElement())
+		fastInstructions := rules.NewFastInstructions()
+		fastInstructions.StepCount(40)
+		assert.Equal(t, tt.Want, fastInstructions.DifferenceOfMostCommonElementFromLeastCommonElement())
 	}
 }

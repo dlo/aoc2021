@@ -189,13 +189,16 @@ func main() {
 		}
 
 	case 14:
-		rules := day14.ImportRules("day14/testdata/input.txt")
+		rules := day14.ImportRules("day14/testdata/example_input.txt")
 		switch part {
 		case 1:
 			rules.StepCount(10)
 			fmt.Println("Part 1: ", rules.DifferenceOfMostCommonElementFromLeastCommonElement())
 
 		case 2:
+			fastRules := rules.NewFastInstructions()
+			fastRules.StepCount(10)
+			fmt.Println("Part 2: ", fastRules.DifferenceOfMostCommonElementFromLeastCommonElement())
 		}
 	}
 }
