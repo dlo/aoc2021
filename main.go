@@ -22,10 +22,12 @@ import (
 )
 
 var day, part int
+var filename string
 
 func init() {
 	flag.IntVar(&day, "day", 1, "The day")
 	flag.IntVar(&part, "part", 1, "The part")
+	flag.StringVar(&filename, "filename", "input.txt", "The filename")
 }
 
 /// Usage: go run main.go --day 1 --part 1
@@ -33,9 +35,10 @@ func main() {
 	flag.Parse()
 
 	fmt.Printf("Day %d, ", day)
+	formattedFile := fmt.Sprintf("day%d/testdata/%s", day, filename)
 	switch day {
 	case 1:
-		items := utils.IntegerLinesFromFile("day1/day1_input.txt")
+		items := utils.IntegerLinesFromFile(formattedFile)
 
 		switch part {
 		case 1:
@@ -46,7 +49,7 @@ func main() {
 		}
 
 	case 2:
-		commands := day02.Part1ParseCommands("day2/testdata/input.txt")
+		commands := day02.Part1ParseCommands(formattedFile)
 
 		switch part {
 		case 1:
@@ -58,7 +61,7 @@ func main() {
 			fmt.Println("Part Two: ", position.ProductOfCoordinates())
 		}
 	case 3:
-		reportValues, length := utils.BinaryLinesFromFile("day3/testdata/input.txt")
+		reportValues, length := utils.BinaryLinesFromFile(formattedFile)
 		report := day03.DiagnosticReport{Numbers: reportValues, Length: length}
 
 		switch part {
@@ -68,7 +71,7 @@ func main() {
 			fmt.Println("Part Two: ", int(report.CalculateLifeSupportRating()))
 		}
 	case 4:
-		result := day04.ParseBingoCardDataFromFile("day4/testdata/input.txt")
+		result := day04.ParseBingoCardDataFromFile(formattedFile)
 		switch part {
 		case 1:
 			fmt.Println(result.FindWinningScore())
@@ -78,7 +81,7 @@ func main() {
 		}
 
 	case 5:
-		measurements := day05.ParseHydrothermalVentMeasurements("day5/testdata/example_input.txt")
+		measurements := day05.ParseHydrothermalVentMeasurements(formattedFile)
 
 		switch part {
 		case 1:
@@ -91,7 +94,7 @@ func main() {
 		}
 
 	case 6:
-		ages := day06.ParseFishFile("day6/testdata/input.txt")
+		ages := day06.ParseFishFile(formattedFile)
 		switch part {
 		case 1:
 			size := day06.CalculateSchoolSizeAfterNDays(ages, 80)
@@ -103,7 +106,7 @@ func main() {
 		}
 
 	case 7:
-		positions := day07.ParseHorizontalPositions("day7/testdata/input.txt")
+		positions := day07.ParseHorizontalPositions(formattedFile)
 		switch part {
 		case 1:
 			position := day07.CalculateCheapestPosition(positions, day07.Part1CalculateFuelUsageForDelta)
@@ -115,7 +118,7 @@ func main() {
 		}
 
 	case 8:
-		values := day08.ParseDigitsAndOutputValues("day8/testdata/input.txt")
+		values := day08.ParseDigitsAndOutputValues(formattedFile)
 		switch part {
 		case 1:
 			break
@@ -125,7 +128,7 @@ func main() {
 		}
 
 	case 9:
-		heightMap := day09.GenerateHeightMap("day9/testdata/input.txt")
+		heightMap := day09.GenerateHeightMap(formattedFile)
 		switch part {
 		case 1:
 			points := heightMap.LowPoints()
@@ -140,7 +143,7 @@ func main() {
 		}
 
 	case 10:
-		subsystem := day10.GenerateRawSubsystemFromFile("day10/testdata/input.txt")
+		subsystem := day10.GenerateRawSubsystemFromFile(formattedFile)
 		switch part {
 		case 1:
 			fmt.Println("Part One:", subsystem.SyntaxErrorScore())
@@ -150,7 +153,7 @@ func main() {
 		}
 
 	case 11:
-		grid := day11.ReadOctopusGrid("day11/testdata/input.txt")
+		grid := day11.ReadOctopusGrid(formattedFile)
 		switch part {
 		case 1:
 			fmt.Print("Part 1")
@@ -167,7 +170,7 @@ func main() {
 		}
 
 	case 12:
-		caveMap := day12.ImportCaveMap("day12/testdata/input.txt")
+		caveMap := day12.ImportCaveMap(formattedFile)
 		switch part {
 		case 1:
 			fmt.Println("Part 1:", caveMap.CountUniquePaths(false))
@@ -177,7 +180,7 @@ func main() {
 		}
 
 	case 13:
-		grid := day13.ImportGrid("day13/testdata/input.txt")
+		grid := day13.ImportGrid(formattedFile)
 		switch part {
 		case 1:
 			fmt.Println("Part 1:", grid.Fold().CountDots())
@@ -190,7 +193,7 @@ func main() {
 		}
 
 	case 14:
-		rules := day14.ImportRules("day14/testdata/input.txt")
+		rules := day14.ImportRules(formattedFile)
 		switch part {
 		case 1:
 			rules.StepCount(10)
@@ -203,7 +206,7 @@ func main() {
 		}
 
 	case 15:
-		cavern := day15.ImportCavernData("day15/testdata/input.txt")
+		cavern := day15.ImportCavernData(formattedFile)
 		switch part {
 		case 1:
 			fmt.Println("Part 1: ")
