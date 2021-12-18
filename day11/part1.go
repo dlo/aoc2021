@@ -32,7 +32,7 @@ func (g OctopusGrid) Neighbors(p utils.Point) []utils.Point {
 }
 
 func (g OctopusGrid) EnergyLevel(point utils.Point) EnergyLevel {
-	return EnergyLevel(g.grid.ValueAt(point))
+	return EnergyLevel(g.grid.UnsafeValueAt(point))
 }
 
 func (g *OctopusGrid) IncreaseEnergy(p utils.Point) {

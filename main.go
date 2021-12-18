@@ -203,11 +203,13 @@ func main() {
 		}
 
 	case 15:
-		cavern := day15.ImportCavernData("day15/testdata/example_input.txt")
+		cavern := day15.ImportCavernData("day15/testdata/input.txt")
 		switch part {
 		case 1:
 			fmt.Println("Part 1: ")
-			cavern.Println()
+			cavern.CalculateRiskSums(utils.Point{0, 0})
+			fmt.Println(cavern.Risk())
+			cavern.PrintRisk()
 
 		case 2:
 		}

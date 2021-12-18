@@ -45,7 +45,7 @@ func (cs CaveStorage) Println() {
 
 		for x := range cs.cm[y] {
 			point := utils.Point{x, y}
-			fmt.Print(utils.IntMatrix(cs.cm).ValueAt(point))
+			fmt.Print(utils.IntMatrix(cs.cm).UnsafeValueAt(point))
 		}
 
 		fmt.Println()
