@@ -1,6 +1,7 @@
 package day10
 
 import (
+	"github.com/dlo/aoc2021/utils"
 	"sort"
 )
 
@@ -14,7 +15,7 @@ func CompletionScore() map[rune]int {
 }
 
 func (c RawChunks) CompletionScore() int {
-	queue := LIFOQueue{}
+	queue := utils.LIFOQueue{}
 	delimiters := MatchingDelimiters()
 	scores := CompletionScore()
 	for _, r := range []rune(c) {

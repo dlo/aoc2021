@@ -7,12 +7,13 @@ import (
 )
 
 type Point [2]int
+type IntRow []int
 type IntMatrix [][]int
 
 func NewIntMatrix(height int, width int) IntMatrix {
-	var m IntMatrix = make([][]int, height)
+	m := make(IntMatrix, height)
 	for j := range m {
-		m[j] = make([]int, width)
+		m[j] = make(IntRow, width)
 	}
 	return m
 }
@@ -26,6 +27,15 @@ func (p Point) Coordinates() (x int, y int) {
 	return p[0], p[1]
 }
 
+func (m IntMatrix) GenerateDistanceMatrix() IntMatrix {
+	distances := make(IntMatrix, len(m))
+	for j := range distances {
+		distances[j] = make(IntRow, len(m[j]))
+	}
+
+	return distances
+}
+
 func (m IntMatrix) IsBottomRightPoint(p Point) bool {
 	x, y := p.Coordinates()
 	return y == len(m)-1 && x == len(m[0])-1
@@ -35,23 +45,22 @@ func (m IntMatrix) Neighbors(p Point) []Point {
 	return m.NeighborsForXY(p.Coordinates())
 }
 
-func (m IntMatrix) SetValue(point Point, value int) {
-	x, y := point.Coordinates()
+func (m IntMatrix) SetValue(p Point, value int) {
+	x, y := p.Coordinates()
 	m[y][x] = value
 }
 
-func (m IntMatrix) UnsafeValueAt(point Point) int {
-	x, y := point.Coordinates()
+func (m IntMatrix) UnsafeValueAt(p Point) int {
+	x, y := p.Coordinates()
 	return m[y][x]
 }
 
-func (m IntMatrix) ValueAt(point Point) (int, error) {
-	if !m.IsValidPoint(point) {
+func (m IntMatrix) ValueAt(p Point) (int, error) {
+	if !m.IsValidPoint(p) {
 		return -1, errors.New("invalid")
 	}
 
-	x, y := point.Coordinates()
-	return m[y][x], nil
+	return m.UnsafeValueAt(p), nil
 }
 
 func (m IntMatrix) PrintlnWidth(width int64) {
