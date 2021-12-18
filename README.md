@@ -33,3 +33,10 @@ Howto
    go test github.com/dlo/aoc2021/utils -cover
    ok      github.com/dlo/aoc2021/utils    (cached)        coverage: 12.1% of statements
    ```
+
+5. Run the command for a specific day:
+
+    ```shell
+   $ go build
+   $ ./aoc2021 --day 1 --part 1 --filename input.txt // Reads from day01/testdata/input.txt
+   ```

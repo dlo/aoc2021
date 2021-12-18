@@ -35,7 +35,7 @@ func main() {
 	flag.Parse()
 
 	fmt.Printf("Day %d, ", day)
-	formattedFile := fmt.Sprintf("day%d/testdata/%s", day, filename)
+	formattedFile := fmt.Sprintf("day%02d/testdata/%s", day, filename)
 	switch day {
 	case 1:
 		items := utils.IntegerLinesFromFile(formattedFile)
