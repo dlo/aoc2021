@@ -38,7 +38,7 @@ func SyntaxErrorScore() map[rune]int {
 }
 
 func (c RawChunks) SyntaxErrorScore() int {
-	queue := utils.LIFOQueue{}
+	queue := utils.LIFOQueueRune{}
 	delimiters := MatchingDelimiters()
 	scores := SyntaxErrorScore()
 	for _, r := range []rune(c) {

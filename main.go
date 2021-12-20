@@ -19,6 +19,9 @@ import (
 	"github.com/dlo/aoc2021/day14"
 	"github.com/dlo/aoc2021/day15"
 	"github.com/dlo/aoc2021/utils"
+	"github.com/gdamore/tcell/v2"
+	"log"
+	"os"
 )
 
 var day, part int
@@ -207,14 +210,68 @@ func main() {
 
 	case 15:
 		cavern := day15.ImportCavernData(formattedFile)
-		switch part {
-		case 1:
-			fmt.Println("Part 1: ")
-			cavern.CalculateRiskSums(utils.Point{0, 0})
-			fmt.Println(cavern.Risk())
-			cavern.PrintRisk()
+		m := cavern.DijkstraPath(utils.Point{0, 0})
+		maxX, maxY := m.Size()
+		point := utils.Point{maxX - 1, maxY - 1}
+		fmt.Println(m.UnsafeValueAt(point))
 
-		case 2:
+		if false {
+			s, err := tcell.NewScreen()
+			if err != nil {
+				log.Fatalf("%+v", err)
+			}
+			if err := s.Init(); err != nil {
+				log.Fatalf("%+v", err)
+			}
+
+			// Set default text style
+			background := tcell.StyleDefault.Background(tcell.ColorReset).Foreground(tcell.ColorReset)
+			s.SetStyle(background)
+
+			// Clear screen
+			s.Clear()
+			s.Show()
+
+			quit := func() {
+				s.Fini()
+				fmt.Println()
+				os.Exit(0)
+			}
+
+			for {
+				ev := s.PollEvent()
+				switch ev := ev.(type) {
+				case *tcell.EventResize:
+					s.Sync()
+
+				case *tcell.EventKey:
+					switch ev.Key() {
+					case tcell.KeyEscape, tcell.KeyCtrlC:
+						quit()
+
+					case tcell.KeyRune:
+						switch ev.Rune() {
+						case 'q':
+							quit()
+
+						default:
+							cavern.Display(s)
+							s.Show()
+						}
+					}
+				}
+			}
 		}
+
+		//
+		//switch part {
+		//case 1:
+		//	//fmt.Println("Part 1: ")
+		//	cavern.CalculateRiskSums(utils.Point{0, 0})
+		//	//fmt.Println(cavern.Risk())
+		//	//cavern.PrintRisk()
+		//
+		//case 2:
+		//}
 	}
 }

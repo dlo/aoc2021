@@ -6,7 +6,7 @@ import (
 )
 
 func TestLIFOQueue_Pop(t *testing.T) {
-	queue := LIFOQueue{}
+	queue := LIFOQueueRune{}
 	queue.Push('1')
 	queue.Push('2')
 	result, _ := queue.Pop()

@@ -3,16 +3,22 @@ package day15
 import (
 	"fmt"
 	"github.com/dlo/aoc2021/utils"
+	"github.com/gdamore/tcell/v2"
 	"math"
 )
 
 type Cavern struct {
-	riskLevels utils.IntMatrix
-	riskSums   utils.IntMatrix
+	grid     utils.IntMatrix
+	riskSums utils.IntMatrix
 }
 
 func (c Cavern) Println() {
-	c.riskLevels.Println()
+	c.grid.Println()
+}
+
+func (c Cavern) Display(s tcell.Screen) {
+	c.grid.Display(s, 0, 0)
+	c.riskSums.Display(s, 0, 11)
 }
 
 func (c Cavern) PrintRisk() {
@@ -37,8 +43,12 @@ func (c Cavern) Risk() int {
 	return c.riskSums[0][0]
 }
 
+func (c Cavern) DijkstraPath(p utils.Point) utils.IntMatrix {
+	return c.grid.DijkstraPath(p)
+}
+
 func (c Cavern) CalculateRiskSums(p utils.Point) int {
-	if c.riskLevels.IsBottomRightPoint(p) {
+	if c.grid.IsBottomRightPoint(p) {
 		return 0
 	}
 
@@ -51,7 +61,7 @@ func (c Cavern) CalculateRiskSums(p utils.Point) int {
 	for _, potential := range potentials {
 		potentialValue := -1
 		if potentialValue, _ = c.riskSums.ValueAt(potential); potentialValue == 0 {
-			potentialValue = c.riskLevels.UnsafeValueAt(potential) + c.CalculateRiskSums(potential)
+			potentialValue = c.grid.UnsafeValueAt(potential) + c.CalculateRiskSums(potential)
 			c.riskSums.SetValue(potential, potentialValue)
 		}
 

@@ -2,17 +2,17 @@ package utils
 
 import "errors"
 
-type LIFOQueue []rune
+type LIFOQueueRune []rune
 
-func (s *LIFOQueue) Push(r rune) {
+func (s *LIFOQueueRune) Push(r rune) {
 	*s = append(*s, r)
 }
 
-func (s *LIFOQueue) UnsafePop() {
+func (s *LIFOQueueRune) UnsafePop() {
 	_, _ = s.Pop()
 }
 
-func (s *LIFOQueue) Pop() (rune, error) {
+func (s *LIFOQueueRune) Pop() (rune, error) {
 	if len(*s) == 0 {
 		return '-', errors.New("queue is empty")
 	}

@@ -15,7 +15,7 @@ func CompletionScore() map[rune]int {
 }
 
 func (c RawChunks) CompletionScore() int {
-	queue := utils.LIFOQueue{}
+	queue := utils.LIFOQueueRune{}
 	delimiters := MatchingDelimiters()
 	scores := CompletionScore()
 	for _, r := range []rune(c) {
