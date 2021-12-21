@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestDifferenceOfMostCommonElementFromLeastCommonElement40Steps(t *testing.T) {
+func TestDijkstraPath(t *testing.T) {
 	tests := []utils.SimpleTestCase{
 		{"testdata/example_input.txt", 40},
 		{"testdata/input.txt", 540},

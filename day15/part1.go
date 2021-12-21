@@ -13,7 +13,7 @@ type Cavern struct {
 }
 
 func (c Cavern) Println() {
-	c.grid.Println()
+	c.grid.PrintlnWidth(1)
 }
 
 func (c Cavern) Display(s tcell.Screen) {

@@ -210,10 +210,21 @@ func main() {
 
 	case 15:
 		cavern := day15.ImportCavernData(formattedFile)
-		m := cavern.DijkstraPath(utils.Point{0, 0})
-		maxX, maxY := m.Size()
-		point := utils.Point{maxX - 1, maxY - 1}
-		fmt.Println(m.UnsafeValueAt(point))
+		switch part {
+		case 1:
+			m := cavern.DijkstraPath(utils.Point{0, 0})
+			maxX, maxY := m.Size()
+			point := utils.Point{maxX - 1, maxY - 1}
+			fmt.Println(m.UnsafeValueAt(point))
+
+		case 2:
+			fmt.Println()
+			nc := cavern.MultiplyCavern()
+			m := nc.DijkstraPath(utils.Point{0, 0})
+			maxX, maxY := m.Size()
+			point := utils.Point{maxX - 1, maxY - 1}
+			fmt.Println(m.UnsafeValueAt(point))
+		}
 
 		if false {
 			s, err := tcell.NewScreen()

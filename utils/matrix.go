@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"container/heap"
 	"errors"
 	"fmt"
 	"github.com/gdamore/tcell/v2"
@@ -71,44 +72,40 @@ func (m IntMatrix) DijkstraPath(p Point) IntMatrix {
 }
 
 func (m IntMatrix) DijkstraPathXY(x, y int) IntMatrix {
-	queue := map[Point]bool{}
 	dist := map[Point]int{}
+	queue := &PointHeap{}
+	heap.Init(queue)
 
+	maxRiskPerCoordinate := 9
+	var manhattanDistance int
 	for j := range m {
 		for i := range m[j] {
 			p := Point{i, j}
 
-			// Distance * Max 9 per block
-			dist[p] = (i + j) * 9
-			queue[p] = true
+			manhattanDistance = i + j
+			dist[p] = manhattanDistance * maxRiskPerCoordinate
+
+			heap.Push(queue, PointWithRisk{p, dist[p]})
 		}
 	}
 
 	cur := Point{x, y}
 	dist[cur] = 0
-	var minCost int
-
-	for queue[cur] {
-		delete(queue, cur)
-
+	for queue.Len() > 0 {
 		neighbors := m.NonDiagonalNeighbors(cur)
 		for _, neighbor := range neighbors {
-			distance := m.UnsafeValueAt(neighbor)
+			delta := m.UnsafeValueAt(neighbor)
 
-			distanceToNeighbor := distance + dist[cur]
+			distanceToNeighbor := delta + dist[cur]
 			if distanceToNeighbor < dist[neighbor] {
 				dist[neighbor] = distanceToNeighbor
+
+				// Duplicates don't have a large impact on complexity
+				heap.Push(queue, PointWithRisk{neighbor, distanceToNeighbor})
 			}
 		}
 
-		minCost = math.MaxInt
-		for k := range queue {
-			v := dist[k]
-			if v < minCost {
-				cur = k
-				minCost = v
-			}
-		}
+		cur = heap.Pop(queue).(PointWithRisk).point
 	}
 
 	distMatrix := make(IntMatrix, len(m))
