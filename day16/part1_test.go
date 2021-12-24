@@ -12,7 +12,7 @@ type TestCase struct {
 
 func TestVersionNumberSum(t *testing.T) {
 	tests := []TestCase{
-		{"testdata/example_input.txt", []int{16, 12, 23, 31, 974}},
+		{"testdata/example_input.txt", []int{16, 12, 23, 31}},
 		{"testdata/input.txt", []int{974}},
 	}
 
