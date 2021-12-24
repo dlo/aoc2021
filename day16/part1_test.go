@@ -6,18 +6,22 @@ import (
 )
 
 type TestCase struct {
-	want int
+	filename string
+	want     []int
 }
 
 func TestVersionNumberSum(t *testing.T) {
 	tests := []TestCase{
-		{16}, {12}, {23}, {31}, {974},
+		{"testdata/example_input.txt", []int{16, 12, 23, 31, 974}},
+		{"testdata/input.txt", []int{974}},
 	}
 
-	transmissions := ImportBITSTransmission("testdata/example_input.txt")
-	for i, tt := range tests {
-		transmission := transmissions[i]
-		result, _ := transmission.Process()
-		assert.Equal(t, tt.want, result.VersionNumberSum())
+	for _, tt := range tests {
+		transmissions := ImportBITSTransmission(tt.filename)
+		for i, want := range tt.want {
+			transmission := transmissions[i]
+			result, _ := transmission.Process()
+			assert.Equal(t, want, result.VersionNumberSum())
+		}
 	}
 }
