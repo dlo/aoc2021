@@ -279,9 +279,16 @@ func main() {
 		transmissions := day16.ImportBITSTransmission(formattedFile)
 		switch part {
 		case 1:
+			fmt.Println("Part 1:")
 			for _, transmission := range transmissions {
 				packet, _ := transmission.Process()
-				fmt.Println("Part 1:", packet.VersionNumberSum())
+				fmt.Println(packet.VersionNumberSum())
+			}
+
+		case 2:
+			for _, transmission := range transmissions {
+				packet, _ := transmission.Process()
+				fmt.Println("Part 1:", packet.Value())
 			}
 		}
 		//

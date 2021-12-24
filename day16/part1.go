@@ -10,12 +10,100 @@ type BITSTransmission struct {
 	raw string
 }
 
+type PacketSlice []Packet
+
+type PacketTypeId int
+
 type Packet struct {
 	version      int
-	packetTypeId int
+	packetTypeId PacketTypeId
 	length       int
 	value        int
 	subpackets   []Packet
+}
+
+func (s PacketSlice) CalculatePacketExpression(packetTypeId PacketTypeId) int {
+	switch packetTypeId {
+	case SumPacketType:
+		return s.Sum()
+
+	case ProductPacketType:
+		return s.Product()
+
+	case MinimumPacketType:
+		return s.Min()
+
+	case MaximumPacketType:
+		return s.Max()
+
+	case GreaterThanPacketType:
+		return s.GreaterThan()
+
+	case LessThanPacketType:
+		return s.LessThan()
+
+	case EqualPacketType:
+		return s.EqualTo()
+
+	default:
+		return 0
+	}
+}
+
+func (s PacketSlice) Sum() int {
+	result := 0
+	for _, packet := range s {
+		result += packet.value
+	}
+	return result
+}
+
+func (s PacketSlice) Product() int {
+	result := s[0].value
+	for _, packet := range s[1:] {
+		result *= packet.value
+	}
+	return result
+}
+
+func (s PacketSlice) Min() int {
+	min := s[0].value
+	for _, packet := range s[1:] {
+		min = utils.Min(min, packet.value)
+	}
+	return min
+}
+
+func (s PacketSlice) Max() int {
+	max := s[0].value
+	for _, packet := range s[1:] {
+		max = utils.Max(max, packet.value)
+	}
+	return max
+}
+
+func (s PacketSlice) GreaterThan() int {
+	if s[0].value > s[1].value {
+		return 1
+	} else {
+		return 0
+	}
+}
+
+func (s PacketSlice) LessThan() int {
+	if s[0].value < s[1].value {
+		return 1
+	} else {
+		return 0
+	}
+}
+
+func (s PacketSlice) EqualTo() int {
+	if s[0].value == s[1].value {
+		return 1
+	} else {
+		return 0
+	}
 }
 
 func (p Packet) VersionNumberSum() int {
@@ -58,7 +146,7 @@ const (
 	ProductPacketType
 	MinimumPacketType
 	MaximumPacketType
-	LiteralPacketType = 4
+	LiteralPacketType
 	GreaterThanPacketType
 	LessThanPacketType
 	EqualPacketType
@@ -69,26 +157,28 @@ const (
 	LengthTypeNumberOfSubPackets
 )
 
+func (p Packet) Value() int {
+	return p.value
+}
+
 func (t *BITSTransmission) Process() (*Packet, error) {
 	version, _ := t.Read(3)
-	packetTypeId, _ := t.Read(3)
+	rawPacketTypeId, _ := t.Read(3)
+	packetTypeId := PacketTypeId(rawPacketTypeId)
 	length := 6
 	switch packetTypeId {
 	case LiteralPacketType:
 		number := 0
 		for {
 			shouldContinue, _ := t.Read(1)
-
 			number <<= 4
-
 			value, err := t.Read(4)
 			if err != nil {
 				return nil, errors.New(fmt.Sprintf("literal packet error: %s", err.Error()))
 			}
-
+			
 			number += value
 			length += 5
-
 			if shouldContinue&1 == 0 {
 				break
 			}
@@ -98,7 +188,7 @@ func (t *BITSTransmission) Process() (*Packet, error) {
 	default:
 		lengthTypeID, _ := t.Read(1)
 		length += 1
-		var packets []Packet
+		var packets PacketSlice
 		switch lengthTypeID {
 		case LengthTypeTotalLengthInBits:
 			lengthOfSubPackets, _ := t.Read(15)
@@ -129,7 +219,14 @@ func (t *BITSTransmission) Process() (*Packet, error) {
 		default:
 			return nil, errors.New("unknown length type id")
 		}
-		return &Packet{version, packetTypeId, length, 0, packets}, nil
+
+		return &Packet{
+			version,
+			packetTypeId,
+			length,
+			packets.CalculatePacketExpression(packetTypeId),
+			packets,
+		}, nil
 	}
 }
 
