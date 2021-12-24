@@ -18,6 +18,7 @@ import (
 	"github.com/dlo/aoc2021/day13"
 	"github.com/dlo/aoc2021/day14"
 	"github.com/dlo/aoc2021/day15"
+	"github.com/dlo/aoc2021/day16"
 	"github.com/dlo/aoc2021/utils"
 	"github.com/gdamore/tcell/v2"
 	"log"
@@ -274,6 +275,15 @@ func main() {
 			}
 		}
 
+	case 16:
+		transmissions := day16.ImportBITSTransmission(formattedFile)
+		switch part {
+		case 1:
+			for _, transmission := range transmissions {
+				packet, _ := transmission.Process()
+				fmt.Println("Part 1:", packet.VersionNumberSum())
+			}
+		}
 		//
 		//switch part {
 		//case 1:
