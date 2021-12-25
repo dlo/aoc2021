@@ -6,15 +6,15 @@ import (
 	"testing"
 )
 
-func TestMaxY(t *testing.T) {
+func TestCount(t *testing.T) {
 	tests := []utils.SimpleTestCase{
-		{"testdata/example_input.txt", 45},
-		{"testdata/input.txt", 9180},
+		{"testdata/example_input.txt", 112},
+		{"testdata/input.txt", 3767},
 	}
 
 	for _, tt := range tests {
 		area := ImportData(tt.Filename)
 		solution := area.FindSolution()
-		assert.Equal(t, tt.Want, solution.MaxY())
+		assert.Equal(t, tt.Want, solution.Count())
 	}
 }

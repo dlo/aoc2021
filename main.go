@@ -19,6 +19,7 @@ import (
 	"github.com/dlo/aoc2021/day14"
 	"github.com/dlo/aoc2021/day15"
 	"github.com/dlo/aoc2021/day16"
+	"github.com/dlo/aoc2021/day17"
 	"github.com/dlo/aoc2021/utils"
 	"github.com/gdamore/tcell/v2"
 	"log"
@@ -290,6 +291,18 @@ func main() {
 				packet, _ := transmission.Process()
 				fmt.Println("Part 1:", packet.Value())
 			}
+		}
+
+	case 17:
+		fmt.Println()
+		area := day17.ImportData(formattedFile)
+		solution := area.FindSolution()
+		switch part {
+		case 1:
+			fmt.Println(solution.MaxY())
+
+		case 2:
+			fmt.Println(solution.Count())
 		}
 		//
 		//switch part {
