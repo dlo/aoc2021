@@ -59,10 +59,6 @@ func (r Range) ContainsValue(i int) bool {
 	return i >= r.Min() && i <= r.Max()
 }
 
-func (r Range) LessThanValue(i int) bool {
-	return i > r.Max()
-}
-
 func (p *Position) Step() {
 	p.x += p.dx
 	p.y += p.dy
@@ -93,21 +89,6 @@ func (p Position) PassedTargetArea(a TargetArea) bool {
 	return p.x > a.x.Max() || p.y < a.y.Min()
 }
 
-func ParseInt(s string) int {
-	value, _ := strconv.Atoi(s)
-	return value
-}
-
-func ParseRange(s string) (Range, error) {
-	idx := strings.Index(s, "=")
-	if idx == -1 {
-		return [2]int{0, 0}, errors.New("invalid")
-	}
-
-	components := strings.Split(s[idx+1:], "..")
-	return [2]int{ParseInt(components[0]), ParseInt(components[1])}, nil
-}
-
 func (a TargetArea) FindSolution() SolutionGroup {
 	group := SolutionGroup{}
 	for x := -100; x < 200; x++ {
@@ -121,6 +102,21 @@ func (a TargetArea) FindSolution() SolutionGroup {
 		}
 	}
 	return group
+}
+
+func ParseInt(s string) int {
+	value, _ := strconv.Atoi(s)
+	return value
+}
+
+func ParseRange(s string) (Range, error) {
+	idx := strings.Index(s, "=")
+	if idx == -1 {
+		return [2]int{0, 0}, errors.New("invalid")
+	}
+
+	components := strings.Split(s[idx+1:], "..")
+	return [2]int{ParseInt(components[0]), ParseInt(components[1])}, nil
 }
 
 func ImportData(filename string) TargetArea {
