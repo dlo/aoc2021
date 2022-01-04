@@ -20,6 +20,7 @@ import (
 	"github.com/dlo/aoc2021/day15"
 	"github.com/dlo/aoc2021/day16"
 	"github.com/dlo/aoc2021/day17"
+	"github.com/dlo/aoc2021/day18"
 	"github.com/dlo/aoc2021/utils"
 	"github.com/gdamore/tcell/v2"
 	"log"
@@ -303,6 +304,19 @@ func main() {
 
 		case 2:
 			fmt.Println(solution.Count())
+		}
+
+	case 18:
+		fmt.Println()
+		numbers := day18.ImportSnailfishNumbers(formattedFile)
+		for _, number := range numbers {
+			fmt.Println(number)
+		}
+		switch part {
+		case 1:
+
+		case 2:
+
 		}
 		//
 		//switch part {
